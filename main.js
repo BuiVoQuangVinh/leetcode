@@ -1,19 +1,34 @@
 
-// 746. Min Cost Climbing Stairs
+// 1317. Convert Integer to the Sum of Two No-Zero Integers
 
-const cost = [1,100,1,1,1,100,1,1,100,1]
+const n = 1501
 
-var minCostClimbingStairs = function (cost) {
-    if(cost.length === 1){
-        return cost[0]
+var getNoZeroIntegers = function (n) {
+    const result = [0, 0]
+    if (n >= 1000) {
+        result[0] = n - 999
+        result[1] = 999
+    } else if (n >= 100) {
+        result[0] = n - 99
+        result[1] = 99
+    } else if (n >= 10) {
+        result[0] = n - 9
+        result[1] = 9
     }
-    cost.push(0)
-    console.log(cost)
-    for(let i = 2;i<cost.length;i++){
-        cost[i] =Math.min( cost[i]+cost[i-1],cost[i]+cost[i-2]) 
+    else {
+        result[0] = n - 1
+        result[1] = 1
+        return result
     }
 
-    return cost[cost.length-1]
+    // Kiểm tra xem trong arr[0] và arr[1] có chứa số 0 hay không.
+    while (result[0].toString().split('').findIndex(value => value === '0') !== -1 || result[1].toString().split('').findIndex(value => value === '0') !== -1) {
+        result[0]++
+        result[1]--
+    }
+
+    return result
+
 };
 
-console.log(minCostClimbingStairs(cost))
+console.log(getNoZeroIntegers(n))
