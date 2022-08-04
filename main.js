@@ -1,23 +1,19 @@
-// 387. First Unique Character in a String
-const s = "lovel eetco de"
 
-var firstUniqChar = function (s) {
-    const arrFromS = Array.from(s)
-    const hashTable = arrFromS.reduce((obj, currentValue) => {
-        if (obj[currentValue]) {
-            return { ...obj, [currentValue]: obj[currentValue] + 1 }
-        }
-        else {
+// 746. Min Cost Climbing Stairs
 
-            return { ...obj, [currentValue]: 1 }
-        }
-    }, {})
-    for (let i = 0; i < arrFromS.length; i++) {
-        if (hashTable[arrFromS[i]] === 1) {
-            return i
-        }
+const cost = [1,100,1,1,1,100,1,1,100,1]
+
+var minCostClimbingStairs = function (cost) {
+    if(cost.length === 1){
+        return cost[0]
     }
-    return -1
+    cost.push(0)
+    console.log(cost)
+    for(let i = 2;i<cost.length;i++){
+        cost[i] =Math.min( cost[i]+cost[i-1],cost[i]+cost[i-2]) 
+    }
+
+    return cost[cost.length-1]
 };
 
-console.log(firstUniqChar(s))
+console.log(minCostClimbingStairs(cost))
