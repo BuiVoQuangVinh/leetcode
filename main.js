@@ -1,34 +1,35 @@
 
-// 1317. Convert Integer to the Sum of Two No-Zero Integers
+// 392. Is Subsequence
 
-const n = 1501
+const num = 30
 
-var getNoZeroIntegers = function (n) {
-    const result = [0, 0]
-    if (n >= 1000) {
-        result[0] = n - 999
-        result[1] = 999
-    } else if (n >= 100) {
-        result[0] = n - 99
-        result[1] = 99
-    } else if (n >= 10) {
-        result[0] = n - 9
-        result[1] = 9
+s = "", t = "ahbgdc"
+
+var isSubsequence = function (s, t) {
+    const sLength = s.length
+    if (sLength === 0) {
+        return true
     }
-    else {
-        result[0] = n - 1
-        result[1] = 1
-        return result
+    const tLength = t.length
+    if (sLength !== 0 && t.length === 0) {
+        return false
+    }
+    let i = 0
+    let j = 0
+    while (i < sLength && j < tLength) {
+        if (s[i] === t[j]) {
+            if (i === sLength - 1) {
+                return true
+            }
+            i++;
+            j++
+        }
+        else {
+            j++
+        }
     }
 
-    // Kiểm tra xem trong arr[0] và arr[1] có chứa số 0 hay không.
-    while (result[0].toString().split('').findIndex(value => value === '0') !== -1 || result[1].toString().split('').findIndex(value => value === '0') !== -1) {
-        result[0]++
-        result[1]--
-    }
-
-    return result
-
+    return false
 };
 
-console.log(getNoZeroIntegers(n))
+console.log(isSubsequence(s, t))
