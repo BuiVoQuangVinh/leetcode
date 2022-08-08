@@ -1,24 +1,14 @@
-// 2264. Largest 3-Same-Digit Number in String
-const num = "677133339"
-
-var largestGoodInteger = function (num) {
-    let result = ""
-    let count = 1
-    for (let i = 1; i < num.length; i++) {
-        console.log({i:i,num:num[i]})
-        if (num[i-1] === num[i]) {
-            count++
-            if (count >= 3 && result < num[i]) {
-                result = num[i]
-            }
-        }
-        else {
-            count = 1
+// 2154. Keep Multiplying Found Values by Two
+nums = [5, 3, 6, 1, 12], original = 3
+var findFinalValue = function (nums, original) {
+    nums.sort((a, b) => a - b)
+    for (let num of nums) {
+        if (num === original) {
+            original *= 2
         }
     }
-    return `${result}${result}${result}`
+    return original
 };
 
 
-console.log(largestGoodInteger(num))
-
+console.log(findFinalValue(nums, original))
