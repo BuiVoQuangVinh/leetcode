@@ -1,35 +1,24 @@
+// 2264. Largest 3-Same-Digit Number in String
+const num = "677133339"
 
-// 392. Is Subsequence
-
-const num = 30
-
-s = "", t = "ahbgdc"
-
-var isSubsequence = function (s, t) {
-    const sLength = s.length
-    if (sLength === 0) {
-        return true
-    }
-    const tLength = t.length
-    if (sLength !== 0 && t.length === 0) {
-        return false
-    }
-    let i = 0
-    let j = 0
-    while (i < sLength && j < tLength) {
-        if (s[i] === t[j]) {
-            if (i === sLength - 1) {
-                return true
+var largestGoodInteger = function (num) {
+    let result = ""
+    let count = 1
+    for (let i = 1; i < num.length; i++) {
+        console.log({i:i,num:num[i]})
+        if (num[i-1] === num[i]) {
+            count++
+            if (count >= 3 && result < num[i]) {
+                result = num[i]
             }
-            i++;
-            j++
         }
         else {
-            j++
+            count = 1
         }
     }
-
-    return false
+    return `${result}${result}${result}`
 };
 
-console.log(isSubsequence(s, t))
+
+console.log(largestGoodInteger(num))
+
