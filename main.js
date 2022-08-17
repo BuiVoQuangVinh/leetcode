@@ -1,14 +1,28 @@
-// 2154. Keep Multiplying Found Values by Two
-nums = [5, 3, 6, 1, 12], original = 3
-var findFinalValue = function (nums, original) {
-    nums.sort((a, b) => a - b)
-    for (let num of nums) {
-        if (num === original) {
-            original *= 2
-        }
+// 258. Add Digits
+
+const num = 19999
+var addDigits = function (num) {
+    let sum = 0
+    if (num <=9){
+        return num
     }
-    return original
+
+   while (num >=10) {
+    while (num > 0) {
+        sum = sum + num % 10
+        num = Math.floor(num / 10)   
+    }
+
+    if(sum >= 10){
+        num = sum
+        sum = 0;
+    }
+
+   }
+
+   return sum
+
+
 };
 
-
-console.log(findFinalValue(nums, original))
+console.log(addDigits(num))
