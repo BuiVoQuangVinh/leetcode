@@ -1,31 +1,37 @@
-// 3. Longest Substring Without Repeating Characters
+// 5. Longest Palindromic Substring
 
-s = "au"
+s = "babad"
 
+// My solution
+const isPalindrome = (s) => {
+    let left = 0;
+    let right = s.length - 1
 
-var lengthOfLongestSubstring = function (s) {
-    let result = 0;
-    let temp = [s[0]]
-    for (let i = 1; i < s.length; i++) {
-        const findIndex = temp.findIndex(value => value == s[i])
-        if (findIndex === -1) {
-            temp.push(s[i])
+    while (left <= right) {
+        if(s[left] !== s[right]){
+            return false
         }
-        else {
-            if (result < temp.length) {
-                result = temp.length
+        left++
+        right--
+    }
+    return true
+}
+
+var longestPalindrome = function (s) {
+    let result = s[0]
+    for (let i = 0; i < s.length - 1; i++) {
+        for (let j = i + 1; j < s.length; j++) {
+            if (s[i] === s[j]) {
+                const temp = s.slice(i, j + 1)
+                if(isPalindrome(temp) && result.length < temp.length ){
+                    result = temp
+                }
+                
             }
-            temp.splice(0, findIndex + 1)
-            temp.push(s[i])
         }
     }
-
-    if (temp.length >result){
-        return temp.length
-    }
-
     return result
 };
 
 
-console.log('1', lengthOfLongestSubstring(s))
+console.log( longestPalindrome(s))
