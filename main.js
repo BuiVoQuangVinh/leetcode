@@ -1,28 +1,31 @@
-// 2108. Find First Palindromic String in the Array
+// 3. Longest Substring Without Repeating Characters
 
-const words = ["abcsffewfewfewfesdfsfdcba", "car", "ada", "racecar", "cool"]
+s = "au"
 
 
-var firstPalindrome = function (words) {
-
-    for (let word of words) {
-        let left = 0
-        let right = word.length - 1
-        while (left <= right) {
-            console.log(word)
-            if(word[right] !== word[left] ){
-                break
+var lengthOfLongestSubstring = function (s) {
+    let result = 0;
+    let temp = [s[0]]
+    for (let i = 1; i < s.length; i++) {
+        const findIndex = temp.findIndex(value => value == s[i])
+        if (findIndex === -1) {
+            temp.push(s[i])
+        }
+        else {
+            if (result < temp.length) {
+                result = temp.length
             }
-            else{
-                left ++
-                right --
-                if(left >= right){
-                    return word
-                }
-            }
+            temp.splice(0, findIndex + 1)
+            temp.push(s[i])
         }
     }
-    return ''
+
+    if (temp.length >result){
+        return temp.length
+    }
+
+    return result
 };
 
-console.log(firstPalindrome(words))
+
+console.log('1', lengthOfLongestSubstring(s))
