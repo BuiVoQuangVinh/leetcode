@@ -1,37 +1,31 @@
-// 5. Longest Palindromic Substring
+// 165. Compare Version Numbers
 
-s = "babad"
 
-// My solution
-const isPalindrome = (s) => {
-    let left = 0;
-    let right = s.length - 1
+version1 = "1.0.1", version2 = "1"
 
-    while (left <= right) {
-        if(s[left] !== s[right]){
-            return false
-        }
-        left++
-        right--
-    }
-    return true
-}
-
-var longestPalindrome = function (s) {
-    let result = s[0]
-    for (let i = 0; i < s.length - 1; i++) {
-        for (let j = i + 1; j < s.length; j++) {
-            if (s[i] === s[j]) {
-                const temp = s.slice(i, j + 1)
-                if(isPalindrome(temp) && result.length < temp.length ){
-                    result = temp
-                }
-                
+var compareVersion = function (version1, version2) {
+    const arr1 = Array.from(version1.split('.'), Number)
+    const arr2 = Array.from(version2.split('.'), Number)
+    let i = 0
+    console.log({arr1,arr2})
+    while (arr1[i]>=0 || arr2[i]>=0) {
+        if (arr1[i] < arr2[i]) {
+            return -1
+        } else if (arr1[i] > arr2[i]) {
+            return 1
+        } else if (arr1[i] === undefined) {
+            if (arr2[i] !== 0) {
+                return -1
+            }
+        } else if (arr2[i] === undefined) {
+            if (arr1[i] !== 0) {
+                return 1
             }
         }
+        i++
+        console.log({i})
     }
-    return result
+    return 0
 };
 
-
-console.log( longestPalindrome(s))
+console.log(compareVersion(version1,version2))
