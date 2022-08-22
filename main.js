@@ -1,38 +1,24 @@
-// 844. Backspace String Compare
+// 1598. Crawler Log Folder
 
-const [s, t] = [
-    "x#####ywrrmp",
-    "x#####ywrrmup"]
+const logs = ["d1/","d2/","./","d3/","../","d31/"]
 
 
-var backspaceCompare = function (s, t) {
-    var handleBackspace = function (str) {
-        const arr = []
-        for (let i = 0; i < str.length; i++) {
-            if (str[i] === '#') {
-                arr.pop()
+var minOperations = function (logs) {
+    let result = 0
+    for (let log of logs) {
+        if(log === './'){
+            continue
+        }else if(log === '../'){
+            result--
+            if(result < 0){
+                result=0
             }
-            else {
-                arr.push(str[i])
-            }
-        }
-        return arr
-    }
 
-    const arrS = handleBackspace(s)
-    const arrT = handleBackspace(t)
-
-    if (arrS.length !== arrT.length) {
-        return false
-    }
-
-    for (let i = 0; i < arrS.length; i++) {
-        if (arrS[i] !== arrT[i]) {
-            return false
+        }else{
+            result++
         }
     }
-
-    return true
+    return result
 };
 
-console.log(backspaceCompare(s, t))
+console.log(minOperations(logs))
