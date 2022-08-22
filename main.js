@@ -1,61 +1,37 @@
 // 844. Backspace String Compare
 
 const [s, t] = [
-    "xywrrmp",
+    "x#####ywrrmp",
     "x#####ywrrmup"]
 
 
 var backspaceCompare = function (s, t) {
-    var backspaceDelete = function (s) {
-        const arr1 = s.split('')
-        let del1 = 0
-        let length = arr1.length
-        for (let i = 0; i < length; i++) {
-            if (arr1[i] === '#') {
-                if (i === 0) {
-                    arr1.splice(i, 1)
-                }
-                else {
-                    del1++
-                }
+    var handleBackspace = function (str) {
+        const arr = []
+        for (let i = 0; i < str.length; i++) {
+            if (str[i] === '#') {
+                arr.pop()
             }
             else {
-                if (del1) {
-                    const start = i - del1 * 2 > 0 ? i - del1 * 2 : 0
-                    arr1.splice(start, i - start)
-                    del1 = 0
-                    i = 0
-                }
-                else if (arr1[i] === undefined) {
-                    break
-                }
+                arr.push(str[i])
             }
         }
-        if (del1) {
-            if (length - del1 * 2 > 0) {
-                const start = length - del1 * 2
-                arr1.splice(start, del1 * 2)
-            }
-            else {
-                return []
-            }
-
-        }
-        return arr1
+        return arr
     }
 
-    const arr1 = backspaceDelete(s)
-    const arr2 = backspaceDelete(t)
+    const arrS = handleBackspace(s)
+    const arrT = handleBackspace(t)
 
-    if (arr1.length !== arr2.length) {
+    if (arrS.length !== arrT.length) {
         return false
     }
 
-    for (let i = 0; i < arr1.length; i++) {
-        if (arr1[i] !== arr2[i]) {
+    for (let i = 0; i < arrS.length; i++) {
+        if (arrS[i] !== arrT[i]) {
             return false
         }
     }
+
     return true
 };
 
