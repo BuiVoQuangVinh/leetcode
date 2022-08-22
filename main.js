@@ -1,33 +1,62 @@
-const nums = [18, 43, 36, 13, 7]
+// 844. Backspace String Compare
 
-var sumOfDigits = (num) => {
-    let total = 0
-    while (num > 0) {
-        const temp = num % 10;
-        num = Math.floor(num / 10)
-        total += temp
-    }
-    return total
-}
+const [s, t] = [
+    "xywrrmp",
+    "x#####ywrrmup"]
 
-var maximumSum = function (nums) {
-    let temp = {}
-    let result = -1;
-    for (let i = 0; i < nums.length; i++) {
-        const sumOfDigitsI = sumOfDigits(nums[i])
-        if (temp[sumOfDigitsI]) {
-            if (result < nums[i] + temp[sumOfDigitsI]) {
-                result = nums[i] + temp[sumOfDigitsI]
+
+var backspaceCompare = function (s, t) {
+    var backspaceDelete = function (s) {
+        const arr1 = s.split('')
+        let del1 = 0
+        let length = arr1.length
+        for (let i = 0; i < length; i++) {
+            if (arr1[i] === '#') {
+                if (i === 0) {
+                    arr1.splice(i, 1)
+                }
+                else {
+                    del1++
+                }
             }
-            if (nums[i] > temp[sumOfDigitsI]) {
-                temp = { ...temp, [sumOfDigitsI]: nums[i] }
+            else {
+                if (del1) {
+                    const start = i - del1 * 2 > 0 ? i - del1 * 2 : 0
+                    arr1.splice(start, i - start)
+                    del1 = 0
+                    i = 0
+                }
+                else if (arr1[i] === undefined) {
+                    break
+                }
             }
         }
-        else {
-            temp = { ...temp, [sumOfDigitsI]: nums[i] }
+        if (del1) {
+            if (length - del1 * 2 > 0) {
+                const start = length - del1 * 2
+                arr1.splice(start, del1 * 2)
+            }
+            else {
+                return []
+            }
+
+        }
+        return arr1
+    }
+
+    const arr1 = backspaceDelete(s)
+    const arr2 = backspaceDelete(t)
+
+    if (arr1.length !== arr2.length) {
+        return false
+    }
+
+    for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) {
+            return false
         }
     }
-    return result
-}
+    return true
+};
 
-console.log(maximumSum(nums))
+console.log(backspaceCompare(s, t))
