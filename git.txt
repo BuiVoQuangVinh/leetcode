@@ -1,0 +1,9 @@
+1. git branch <Ten Branch Moi>
+
+2. git checkout <Ten Branch Muon Chuyen>
+
+3. git add . // add file vào branch mới
+
+4. git commit -m"<Commit>"
+
+5. git push -u  origin <TenBranchMuon Push>

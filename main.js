@@ -1,33 +1,38 @@
-const nums = [18, 43, 36, 13, 7]
+// 844. Backspace String Compare
 
-var sumOfDigits = (num) => {
-    let total = 0
-    while (num > 0) {
-        const temp = num % 10;
-        num = Math.floor(num / 10)
-        total += temp
-    }
-    return total
-}
+const [s, t] = [
+    "x#####ywrrmp",
+    "x#####ywrrmup"]
 
-var maximumSum = function (nums) {
-    let temp = {}
-    let result = -1;
-    for (let i = 0; i < nums.length; i++) {
-        const sumOfDigitsI = sumOfDigits(nums[i])
-        if (temp[sumOfDigitsI]) {
-            if (result < nums[i] + temp[sumOfDigitsI]) {
-                result = nums[i] + temp[sumOfDigitsI]
+
+var backspaceCompare = function (s, t) {
+    var handleBackspace = function (str) {
+        const arr = []
+        for (let i = 0; i < str.length; i++) {
+            if (str[i] === '#') {
+                arr.pop()
             }
-            if (nums[i] > temp[sumOfDigitsI]) {
-                temp = { ...temp, [sumOfDigitsI]: nums[i] }
+            else {
+                arr.push(str[i])
             }
         }
-        else {
-            temp = { ...temp, [sumOfDigitsI]: nums[i] }
+        return arr
+    }
+
+    const arrS = handleBackspace(s)
+    const arrT = handleBackspace(t)
+
+    if (arrS.length !== arrT.length) {
+        return false
+    }
+
+    for (let i = 0; i < arrS.length; i++) {
+        if (arrS[i] !== arrT[i]) {
+            return false
         }
     }
-    return result
-}
 
-console.log(maximumSum(nums))
+    return true
+};
+
+console.log(backspaceCompare(s, t))
