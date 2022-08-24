@@ -1,24 +1,30 @@
-// 1598. Crawler Log Folder
+left = 1, right = 22
 
-const logs = ["d1/","d2/","./","d3/","../","d31/"]
-
-
-var minOperations = function (logs) {
-    let result = 0
-    for (let log of logs) {
-        if(log === './'){
-            continue
-        }else if(log === '../'){
-            result--
-            if(result < 0){
-                result=0
+var selfDividingNumbers = function (left, right) {
+    const result = []
+    const isDividingNumbers = (num) => {
+        let temp = num
+        while (temp >= 1) {
+            if (num % (temp % 10) !== 0) {
+                return false
             }
-
-        }else{
-            result++
+            temp = Math.floor(temp / 10)
         }
+        return true
     }
+
+    while (left <= right) {
+        if (isDividingNumbers(left)){
+            result.push(left)
+        }
+        left++
+    }
+
     return result
+
 };
 
-console.log(minOperations(logs))
+
+
+console.log(selfDividingNumbers(left, right))
+
