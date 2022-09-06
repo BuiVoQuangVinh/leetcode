@@ -1,30 +1,27 @@
-left = 1, right = 22
+// 6. Zigzag Conversion
 
-var selfDividingNumbers = function (left, right) {
-    const result = []
-    const isDividingNumbers = (num) => {
-        let temp = num
-        while (temp >= 1) {
-            if (num % (temp % 10) !== 0) {
-                return false
+s = "PAYPALISHIRING", numRows = 3
+
+var convert = function (s, numRows) {
+    if (numRows === 1) {
+        return s
+    }
+    let result = ''
+    const lengthCycle = numRows * 2 - 2
+    for (let i = 0; i < numRows; i++) {
+        const isFisrtRow = (i === 0)
+        const isLastRow = (i === numRows - 1)
+        for (let j = 0; j + i < s.length; j += lengthCycle) {
+            result += s[i + j]
+
+            if (!isFisrtRow && !isLastRow && s[i + j + lengthCycle - 2 * i]) {
+                result += s[i + j + lengthCycle - 2 * i]
             }
-            temp = Math.floor(temp / 10)
         }
-        return true
     }
-
-    while (left <= right) {
-        if (isDividingNumbers(left)){
-            result.push(left)
-        }
-        left++
-    }
-
     return result
-
 };
 
-
-
-console.log(selfDividingNumbers(left, right))
+console.log(convert(s, numRows))
+console.log(convert(s, numRows) === `PAHNAPLSIIGYIR`)
 
