@@ -1,27 +1,29 @@
-// 6. Zigzag Conversion
+// 11. Container With Most Water
 
-s = "PAYPALISHIRING", numRows = 3
+height = [1,8,6,2,5,4,8,3,7]
 
-var convert = function (s, numRows) {
-    if (numRows === 1) {
-        return s
-    }
-    let result = ''
-    const lengthCycle = numRows * 2 - 2
-    for (let i = 0; i < numRows; i++) {
-        const isFisrtRow = (i === 0)
-        const isLastRow = (i === numRows - 1)
-        for (let j = 0; j + i < s.length; j += lengthCycle) {
-            result += s[i + j]
 
-            if (!isFisrtRow && !isLastRow && s[i + j + lengthCycle - 2 * i]) {
-                result += s[i + j + lengthCycle - 2 * i]
-            }
+var maxArea = function(height) {
+    let result = -1
+    let right = height.length -1 
+    let left = 0
+
+    while (left< right){
+        const current = (right-left)*Math.min(height[right],height[left])
+
+        if (result < current){
+            result = current
+        }
+
+        if(height[left] < height[right]){
+            left ++
+        }
+        else{
+            right --
         }
     }
     return result
+
 };
 
-console.log(convert(s, numRows))
-console.log(convert(s, numRows) === `PAHNAPLSIIGYIR`)
-
+console.log(maxArea(height))
