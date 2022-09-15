@@ -1,41 +1,32 @@
-// 15. 3Sum
+// 16. 3Sum Closest
 
-nums = [-2,0,1,1,2]
+nums = [-1,2,1,-4,1,2,2], target = 1
 
-var threeSum = function(nums) {
-        const newNums = nums.sort( (a,b)=>a-b  )
-        const result = []
-        for(let i = 0;i < newNums.length -2;i++){
-            let left  = i+1;
-            let right = newNums.length -1;
-            while( left < right){
-                if( newNums[left] + newNums[right]+newNums[i] === 0){
-                    let isValid = true
-                    for (let arr of result ){
-                        if ( arr[0]=== newNums[i] && arr[1]=== newNums[left]&&arr[2]===newNums[right]){
-                            isValid = false
-                        }
-
-                    }
-                    if(isValid){
-                        result.push( [  newNums[i],newNums[left],newNums[right]])
-                        right --
-                    }
-                    else{
-                        right --
-                    }
+var threeSumClosest = function(nums, target) {
+    
+    const newNums = nums.sort( (a,b)=>a-b )
+    let result = Number.MAX_SAFE_INTEGER
+    for(let i=0;i<nums.length-2;i++){
+        let left = i+1
+        let right = nums.length -1
+        while(left < right){
+            if(  Math.abs(target -result )    >  Math.abs(target - newNums[i] - newNums[left] - newNums[right] )){
+                result = newNums[i]+newNums[left]+newNums[right]
+                if(newNums[i]+newNums[left]+newNums[right] === target ){
+                    return result
                 }
-
-                else if( newNums[left] + newNums[right]+newNums[i] > 0){
-                    right --
-                }
-                else {
-                    left++
-                }
+            }   
+            else if( newNums[i]+newNums[left]+newNums[right] > target){
+                right --
+            }
+            else{
+                left++
             }
         }
-        return result
+    }
+
+    return result
+
 };
 
-console.log(threeSum(nums))
-
+console.log(threeSumClosest(nums,target))
