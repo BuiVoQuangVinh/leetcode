@@ -1,14 +1,17 @@
-// 1816. Truncate Sentence
-s = "chopper is not a tanuki", k = 5
+// 2399. Check Distances Between Same Letters
+s = "abaccb", distance = [1,3,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
-
-var truncateSentence = function(s, k) {
-    const arr = s.split(" ")
-    let result = arr[0]
-    for(let i =1;i<k;i++){
-        result +=" "+arr[i]
+var checkDistances = function(s, distance) {
+    let hashTable = {}
+    for(let i=0;i<s.length;i++){
+        if(hashTable[s[i]] === undefined){
+            if(s[i]!==s[i+ distance[s[i].charCodeAt(0)-97] + 1]){
+                return false
+            }
+            hashTable[s[i]] = i
+        }
     }
-    return result
-};  
+    return true
+};
 
-console.log(truncateSentence(s,k))
+console.log(checkDistances(s,distance))
