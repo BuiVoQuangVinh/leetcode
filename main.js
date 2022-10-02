@@ -1,32 +1,23 @@
-// 16. 3Sum Closest
+// 1404. Number of Steps to Reduce a Number in Binary Representation to One
+s = '1111011110000011100000110001011011110010111001010111110001'
 
-nums = [-1,2,1,-4,1,2,2], target = 1
 
-var threeSumClosest = function(nums, target) {
-    
-    const newNums = nums.sort( (a,b)=>a-b )
-    let result = Number.MAX_SAFE_INTEGER
-    for(let i=0;i<nums.length-2;i++){
-        let left = i+1
-        let right = nums.length -1
-        while(left < right){
-            if(  Math.abs(target -result )    >  Math.abs(target - newNums[i] - newNums[left] - newNums[right] )){
-                result = newNums[i]+newNums[left]+newNums[right]
-                if(newNums[i]+newNums[left]+newNums[right] === target ){
-                    return result
-                }
-            }   
-            else if( newNums[i]+newNums[left]+newNums[right] > target){
-                right --
-            }
-            else{
-                left++
-            }
+var numSteps = function (s) {
+
+    let num = BigInt(`0b${s}`)
+
+    let steps = 0
+    while (num != 1n) {
+        if (num % 2n === 1n) {
+            num += 1n
+            steps += 1
+        }
+        else {
+            num = num / 2n
+            steps += 1
         }
     }
-
-    return result
-
+    return steps
 };
 
-console.log(threeSumClosest(nums,target))
+console.log(numSteps(s))
