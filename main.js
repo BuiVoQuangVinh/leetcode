@@ -1,17 +1,16 @@
-// 2399. Check Distances Between Same Letters
-s = "abaccb", distance = [1,3,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+// 136. Single Number
 
-var checkDistances = function(s, distance) {
-    let hashTable = {}
-    for(let i=0;i<s.length;i++){
-        if(hashTable[s[i]] === undefined){
-            if(s[i]!==s[i+ distance[s[i].charCodeAt(0)-97] + 1]){
-                return false
-            }
-            hashTable[s[i]] = i
+nums = [2,2,1,1,3,3,5]
+
+var singleNumber = function(nums) {
+    const newNums = nums.sort( (a,b)=>a-b) 
+    for(let i = 0;i<newNums.length;i+=2){
+        if( newNums[i] !== newNums[i+1] ){
+            return newNums[i]
         }
     }
-    return true
+
+    return -1
 };
 
-console.log(checkDistances(s,distance))
+console.log(singleNumber(nums))
