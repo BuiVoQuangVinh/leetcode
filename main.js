@@ -1,16 +1,42 @@
-// 136. Single Number
+// 2437. Number of Valid Clock Times
+time = "??:2?"
 
-nums = [2,2,1,1,3,3,5]
+var countTime = function(time) {
+    let result = 1;
+    const temp = time.split("")
 
-var singleNumber = function(nums) {
-    const newNums = nums.sort( (a,b)=>a-b) 
-    for(let i = 0;i<newNums.length;i+=2){
-        if( newNums[i] !== newNums[i+1] ){
-            return newNums[i]
-        }
+    // hours
+    if (temp[0] === '?' && temp[1] === '?') {
+        result *= 24
     }
 
-    return -1
+    else if (temp[0] === '?' && Number(temp[1],Number) >=4) {
+        result *= 2
+    }
+    else if (temp[0] === '?') {
+        result *= 3
+    }
+    else if (temp[0] === '2' && temp[1] === '?') {
+        result *= 4
+    }
+    else if (temp[1] === '?') {
+        result *= 10
+    }
+
+    // minutes
+    if (temp[3] === '?' && temp[4] === '?') {
+        result *= 60
+    }
+
+    else if (temp[3] === '?') {
+        result *= 6
+    }
+    else if (temp[4] === '?') {
+        result *= 10
+    }
+
+    return result
 };
 
-console.log(singleNumber(nums))
+
+console.log(countTime(time))
