@@ -1,42 +1,23 @@
-// 2437. Number of Valid Clock Times
-time = "??:2?"
+// 557. Reverse Words in a String III
 
-var countTime = function(time) {
-    let result = 1;
-    const temp = time.split("")
+const s = "Let's take LeetCode contest"
 
-    // hours
-    if (temp[0] === '?' && temp[1] === '?') {
-        result *= 24
-    }
-
-    else if (temp[0] === '?' && Number(temp[1],Number) >=4) {
-        result *= 2
-    }
-    else if (temp[0] === '?') {
-        result *= 3
-    }
-    else if (temp[0] === '2' && temp[1] === '?') {
-        result *= 4
-    }
-    else if (temp[1] === '?') {
-        result *= 10
-    }
-
-    // minutes
-    if (temp[3] === '?' && temp[4] === '?') {
-        result *= 60
-    }
-
-    else if (temp[3] === '?') {
-        result *= 6
-    }
-    else if (temp[4] === '?') {
-        result *= 10
-    }
-
+var reverseWords = function(str) {
+    const reverseWord = (str)=>{
+        let newStr = ''
+        for (let i  = str.length - 1; i>=0;i--){
+            newStr += str[i]
+        }
+        return newStr
+    } 
+    
+    const result  = s.split(" ").reduce( (value,current,index,array)=>{
+        if(index ===  array.length - 1){
+            return value+reverseWord(current)
+        }
+        return value+reverseWord(current)+" "
+    },'' )
     return result
 };
-
-
-console.log(countTime(time))
+console.log(reverseWords(s))
+console.log(reverseWords(s)  === "s'teL ekat edoCteeL tsetnoc")
