@@ -1,23 +1,22 @@
-// 557. Reverse Words in a String III
+// 1662. Check If Two String Arrays are Equivalent
 
-const s = "Let's take LeetCode contest"
+word1  = ["fvnzyxfmvtsezl"], word2 = ["abcddefg"]
 
-var reverseWords = function(str) {
-    const reverseWord = (str)=>{
-        let newStr = ''
-        for (let i  = str.length - 1; i>=0;i--){
-            newStr += str[i]
-        }
-        return newStr
-    } 
+var arrayStringsAreEqual = function(word1, word2) {
     
-    const result  = s.split(" ").reduce( (value,current,index,array)=>{
-        if(index ===  array.length - 1){
-            return value+reverseWord(current)
-        }
-        return value+reverseWord(current)+" "
-    },'' )
-    return result
+    const length = word1.length > word2.length ? word1.length : word2.length
+    let w1 = ''
+    let w2 = ''
+
+    for (let i = 0;i <length;i++){
+        w1 +=word1[i]||''
+        w2 +=word2[i]||''
+    }
+    
+
+    console.log(w1,w2)
+
+    return w1 === w2
 };
-console.log(reverseWords(s))
-console.log(reverseWords(s)  === "s'teL ekat edoCteeL tsetnoc")
+
+console.log(arrayStringsAreEqual(word1,word2))
