@@ -1,50 +1,24 @@
-// 1309. Decrypt String from Alphabet to Integer Mapping
+// 2073. Time Needed to Buy Tickets
 
-s = "1326#"
+tickets = [84, 49, 5, 24, 70, 77, 87, 8], k = 3
 
-var freqAlphabets = function (s) {
-  const hashTable = {
-    '1': 'a',
-    '2': 'b',
-    '3': 'c',
-    '4': 'd',
-    '5': 'e',
-    '6': 'f',
-    '7': 'g',
-    '8': 'h',
-    '9': 'i',
-    '10#': 'j',
-    '11#': 'k',
-    '12#': 'l',
-    '13#': 'm',
-    '14#': 'n',
-    '15#': 'o',
-    '16#': 'p',
-    '17#': 'q',
-    '18#': 'r',
-    '19#': 's',
-    '20#': 't',
-    '21#': 'u',
-    '22#': 'v',
-    '23#': 'w',
-    '24#': 'x',
-    '25#': 'y',
-    '26#': 'z',
-  }
-
-  let result = ''
-
-  for (let i = 0; i < s.length; i++) {
-    if ( s[i + 2] == '#' && (s[i] == '1' || s[i] == '2') ) {
-        temp = s[i] + s[i + 1] + s[i + 2]
-        result += hashTable[temp]
-        i += 2;
-    }
-    else {
-      result += hashTable[s[i]]
+var timeRequiredToBuy = function (tickets, k) {
+  let timeTaken = 0;
+  while (tickets[k] !== 0) {
+    for (let i = 0; i < tickets.length; i++) {
+      if (tickets[i] > 0) {
+        timeTaken += 1;
+        tickets[i]-=1;
+        if (k === i &&tickets[i] === 0) {
+          break
+        }
+      }
     }
   }
-  console.log(result)
+
+  console.log(timeTaken)
 };
 
-freqAlphabets(s)
+
+
+timeRequiredToBuy(tickets, k)
