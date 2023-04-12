@@ -1,24 +1,40 @@
-// 2073. Time Needed to Buy Tickets
+// 205. Isomorphic Strings
 
-tickets = [84, 49, 5, 24, 70, 77, 87, 8], k = 3
+s = "badc", t = "baba"
 
-var timeRequiredToBuy = function (tickets, k) {
-  let timeTaken = 0;
-  while (tickets[k] !== 0) {
-    for (let i = 0; i < tickets.length; i++) {
-      if (tickets[i] > 0) {
-        timeTaken += 1;
-        tickets[i]-=1;
-        if (k === i &&tickets[i] === 0) {
-          break
-        }
-      }
+var isIsomorphic = function (s, t) {
+    if (s.length !== t.length) {
+        return false
     }
-  }
 
-  console.log(timeTaken)
+    let hashTable = {
+
+    }
+
+    for (let i = 0; i < s.length; i++) {
+        if (hashTable[s[i]] === undefined ) {
+            if( Object.values(hashTable).includes(t[i])){
+                return false
+            }
+            
+            hashTable[s[i]] = t[i]
+
+        }
+        else {
+            if (hashTable[s[i]] !== t[i]) {
+                return false
+            }
+        }
+    }
+    return true
 };
 
 
 
-timeRequiredToBuy(tickets, k)
+console.log(isIsomorphic(s, t))
+
+
+const obj = {
+    name:'vinh',
+    age:'24',
+}
