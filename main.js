@@ -1,26 +1,34 @@
-// 121. Best Time to Buy and Sell Stock
-prices = [7, 1, 5, 3, 6, 4]
+// 409. Longest Palindrome
 
-var maxProfit = function (prices) {
-    let profit = 0
-    let buy = prices[0]
-    let sell = prices[0]
-    for (let i = 1; i < prices.length; i++) {
+s= "civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"
 
-        if (sell < prices[i]) {
-            sell = prices[i]
-            if (profit < sell - buy) {
-                profit = sell - buy
-            }
+var longestPalindrome = function (s) {
+    const countTable = {}
+    for (let i = 0; i < s.length; i++) {
+        if (!countTable[s[i]]) {
+            countTable[s[i]] = 1
         }
-
-        if (buy > prices[i]) {
-            buy = prices[i]
-            sell = prices[i]
+        else {
+            countTable[s[i]] += 1
         }
-
     }
-    return profit
+
+    console.log(countTable)
+
+    let result = 0
+    let propeties = Object.keys(countTable)
+
+    for (let i = 0; i < propeties.length; i++) {
+        if (countTable[propeties[i]] % 2 === 0) {
+            result += countTable[propeties[i]]
+        }
+
+        else{
+            result += countTable[propeties[i]] -1 
+        }
+    }
+
+    return result + 1
 };
 
-console.log(maxProfit(prices))
+console.log(longestPalindrome(s))
