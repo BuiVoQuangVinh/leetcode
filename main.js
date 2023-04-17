@@ -1,47 +1,26 @@
+// 121. Best Time to Buy and Sell Stock
+prices = [7, 1, 5, 3, 6, 4]
 
-// 21. Merge Two Sorted Lists
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode} list1
- * @param {ListNode} list2
- * @return {ListNode}
- */
-var mergeTwoLists = function(list1,list2) {
-    let dummy = new ListNode(-1)
-    let head = dummy
-    while(list1 && list2){
+var maxProfit = function (prices) {
+    let profit = 0
+    let buy = prices[0]
+    let sell = prices[0]
+    for (let i = 1; i < prices.length; i++) {
 
-        console.log({dummy,head})
-        if(list1.val < list2.val){
-            head.next = list1
-            list1 = list1.next
+        if (sell < prices[i]) {
+            sell = prices[i]
+            if (profit < sell - buy) {
+                profit = sell - buy
+            }
         }
 
-        else{
-            head.next = list2
-            list2 = list2.next
-        
+        if (buy > prices[i]) {
+            buy = prices[i]
+            sell = prices[i]
         }
-        head = head.next
 
     }
-    if(list1){
-        head.next = list1
-    }
-    if(list2){
-        head.next= list2
-    }
-
-
-    console.log(dummy.next)
-    
-    return dummy.next
-
-
+    return profit
 };
+
+console.log(maxProfit(prices))
