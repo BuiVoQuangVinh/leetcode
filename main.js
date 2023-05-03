@@ -1,34 +1,46 @@
-// 409. Longest Palindrome
+// 2299. Strong Password Checker II
 
-s= "civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"
+password = "AaBbCc!"
 
-var longestPalindrome = function (s) {
-    const countTable = {}
-    for (let i = 0; i < s.length; i++) {
-        if (!countTable[s[i]]) {
-            countTable[s[i]] = 1
-        }
-        else {
-            countTable[s[i]] += 1
-        }
+var strongPasswordCheckerII = function(password) {
+    let leastLetter = 8
+
+    let lowercase = false
+    let uppercase = false
+    let digit = false
+    let specialCharacter = false
+    let sameCharinAdjacent = true
+    
+    if(password.leng < leastLetter){
+        return false
     }
 
-    console.log(countTable)
 
-    let result = 0
-    let propeties = Object.keys(countTable)
 
-    for (let i = 0; i < propeties.length; i++) {
-        if (countTable[propeties[i]] % 2 === 0) {
-            result += countTable[propeties[i]]
+    for (let i=0;i<password.length;i++){
+
+        if( password[i] ===  password[i+1]){
+            return false
+        }
+        // 65:A -> 90:Z
+        if( password[i].charCodeAt()>=65 && password[i].charCodeAt()<=90 ){
+            uppercase = true
+        }
+        // 97:a ->122:z
+        else if( password[i].charCodeAt()>=97 && password[i].charCodeAt()<=122 ){
+            lowercase = true
         }
 
+        else if( password[i].charCodeAt()>=48 && password[i].charCodeAt()<=57 ){
+            digit = true
+        }
         else{
-            result += countTable[propeties[i]] -1 
+            specialCharacter = true
         }
+       
+
     }
 
-    return result + 1
+    return lowercase&& uppercase&&digit&&specialCharacter&&sameCharinAdjacent
 };
-
-console.log(longestPalindrome(s))
+console.log(strongPasswordCheckerII(password))
