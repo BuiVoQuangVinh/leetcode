@@ -1,44 +1,21 @@
-// 2224. Minimum Number of Operations to Convert Time
+// 884. Uncommon Words from Two Sentences
 
 
-var convertTime = function (current, correct) {
-    let result = 0
-    let hours = 0
-    let mins = correct.slice(3, 5) - current.slice(3, 5)
-    if(mins<0){
-        mins+=60
-        hours = correct.slice(0, 2) - current.slice(0, 2) - 1
+var uncommonFromSentences = function (s1, s2) {
+    let arr = [...s1.split(" "), ...s2.split(" ")]
+    let duplicate = []
+    for(let i=0;i<arr.length - 1;i++){
+        for(let j = i+1;j<arr.length;j++){
+            if(arr[i] === arr[j]){
+                duplicate.push(arr[i])
+            }
+        }
     }
-    else{
+    return arr.filter(val => !duplicate.includes(val))
 
-        hours = correct.slice(0, 2) - current.slice(0, 2)
-    }
 
-    if (hours > 0) {
-        let temp = hours
-        hours -= temp
-        result += temp
-    }
-
-    if (mins >= 15) {
-        let temp = parseInt(mins / 15)
-        mins -= temp * 15
-        result += temp
-    }
-
-    if (mins >= 5) {
-        let temp = parseInt(mins / 5)
-        mins -= temp * 5
-        result += temp
-    }
-    if (mins > 0) {
-        let temp = mins
-        mins -= temp
-        result += temp
-    }
-
-    return result
 };
 
+s1 = "this apple is sweet", s2 = "this apple is sour"
 
-console.log(convertTime("00:00", "23:59"));
+console.log(uncommonFromSentences(s1, s2));
