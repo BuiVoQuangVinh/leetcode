@@ -1,21 +1,41 @@
-// 884. Uncommon Words from Two Sentences
+// 459. Repeated Substring Pattern
 
 
-var uncommonFromSentences = function (s1, s2) {
-    let arr = [...s1.split(" "), ...s2.split(" ")]
-    let duplicate = []
-    for(let i=0;i<arr.length - 1;i++){
-        for(let j = i+1;j<arr.length;j++){
-            if(arr[i] === arr[j]){
-                duplicate.push(arr[i])
+s = "aabaaba"
+
+var repeatedSubstringPattern = function (s) {
+    const lengthRepeated = []
+    for (let i = 1; i <= s.length / 2; i++) {
+        if (s[0] === s[i]) {
+            lengthRepeated.push(i)
+        }
+    }
+
+    if (lengthRepeated.length === 0) {
+        return false;
+    }
+
+    for (let i = 0; i < lengthRepeated.length; i++) {
+        let length = lengthRepeated[i]
+        let start = 0;
+        let end = length;
+        const temp = s.slice(start, end)
+        for (let j = 0; j < s.length; j += length) {
+            start += length
+            end += length
+            if (temp !== s.slice(start, end)) {
+                break
+            }
+
+            console.log({ end, length });
+
+            if (end >= s.length) {
+                return true
             }
         }
     }
-    return arr.filter(val => !duplicate.includes(val))
-
+    return false
 
 };
 
-s1 = "this apple is sweet", s2 = "this apple is sour"
-
-console.log(uncommonFromSentences(s1, s2));
+console.log(repeatedSubstringPattern(s));
