@@ -1,41 +1,35 @@
-// 459. Repeated Substring Pattern
+// 1046. Last Stone Weight
 
+stones = [2,7,4,1,8,1]
 
-s = "aabaaba"
+var lastStoneWeight = function(stones) {
+    let newStones = stones.sort((a,b)=> a-b )
 
-var repeatedSubstringPattern = function (s) {
-    const lengthRepeated = []
-    for (let i = 1; i <= s.length / 2; i++) {
-        if (s[0] === s[i]) {
-            lengthRepeated.push(i)
-        }
-    }
+    while(newStones.length > 1 ){
+        const temp = newStones[newStones.length -1] - newStones[newStones.length - 2 ]
+        console.log(newStones);
+        console.log(newStones.length);
+        console.log({temp});
+        newStones = [...newStones.slice(0,-2)]
+        if(temp !== 0){
+            for(let i=0;i<=newStones.length;i++){
+                if(i === newStones.length){
+                    newStones.splice( i+1,0,temp)
+                }
+                if(newStones[i] >= temp){{
+                    newStones.splice( i,0,temp)
+                    break
+                }}
 
-    if (lengthRepeated.length === 0) {
-        return false;
-    }
-
-    for (let i = 0; i < lengthRepeated.length; i++) {
-        let length = lengthRepeated[i]
-        let start = 0;
-        let end = length;
-        const temp = s.slice(start, end)
-        for (let j = 0; j < s.length; j += length) {
-            start += length
-            end += length
-            if (temp !== s.slice(start, end)) {
-                break
-            }
-
-            console.log({ end, length });
-
-            if (end >= s.length) {
-                return true
             }
         }
+        console.log('==========================================');
+        
     }
-    return false
+
+    return newStones[0]
+
 
 };
 
-console.log(repeatedSubstringPattern(s));
+console.log(lastStoneWeight(stones));
