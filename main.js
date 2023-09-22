@@ -7,9 +7,6 @@ var lastStoneWeight = function(stones) {
 
     while(newStones.length > 1 ){
         const temp = newStones[newStones.length -1] - newStones[newStones.length - 2 ]
-        console.log(newStones);
-        console.log(newStones.length);
-        console.log({temp});
         newStones = [...newStones.slice(0,-2)]
         if(temp !== 0){
             for(let i=0;i<=newStones.length;i++){
@@ -22,12 +19,10 @@ var lastStoneWeight = function(stones) {
                 }}
 
             }
-        }
-        console.log('==========================================');
-        
+        }       
     }
 
-    return newStones[0]
+    return newStones[0]?newStones[0]?0
 
 
 };
