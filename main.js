@@ -1,16 +1,30 @@
-// 2144. Minimum Cost of Buying Candies With Discount
+//  1945. Sum of Digits of String After Convert
 
-cost = [5,5]
+s = "zbax"
+k = 3
 
-var minimumCost = function (cost) {
-    let sortCost = cost.sort((a, b) => b - a)
+var getLucky = function (s, k) {
     let result = 0
-    for (let i = 0; i < sortCost.length; i++) {
-        if ((i + 1 )% 3 !== 0) {
-            result += sortCost[i]
-        }
+    let convert = ''
+    const ASCII = 96
+    // convert
+    for (let i = 0; i < s.length; i++) {
+        convert += `${s[i].charCodeAt(0) - ASCII}`
     }
+
+
+    console.log({ convert });
+    // transform
+    for (let i = 0; i < k; i++) {
+        result = 0
+        for (let j = 0; j < convert.length; j++) {
+            result += parseInt(convert[j])
+        }
+        convert = `${result}`
+    }
+
     return result
+
 };
 
-console.log(minimumCost(cost));
+console.log(getLucky(s, k));
