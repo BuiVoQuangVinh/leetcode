@@ -1,30 +1,40 @@
-//  1945. Sum of Digits of String After Convert
+//  509. Fibonacci Number
 
-s = "zbax"
-k = 3
 
-var getLucky = function (s, k) {
+n = 10
+
+var fib = function (n) {
+
+    if (n == 0) {
+        return 0
+    }
+
+    if (n == 1) {
+        return 1
+    }
+
     let result = 0
-    let convert = ''
-    const ASCII = 96
-    // convert
-    for (let i = 0; i < s.length; i++) {
-        convert += `${s[i].charCodeAt(0) - ASCII}`
+    let f0 = 0
+    let f1 = 1
+
+    for (let i = 0; i < n; i++) {
+        result = f0 + f1
+        f1 = f0
+        f0 = result
     }
 
 
-    console.log({ convert });
-    // transform
-    for (let i = 0; i < k; i++) {
-        result = 0
-        for (let j = 0; j < convert.length; j++) {
-            result += parseInt(convert[j])
-        }
-        convert = `${result}`
-    }
+    // let result = 1
+    // let f0 = 0
 
-    return result
+    // for (let i = 0; i < n - 1; i++) {
+    //     let temp = result
+    //     result += f0
+    //     f0 = temp
+    // }
 
+    return result;
 };
 
-console.log(getLucky(s, k));
+
+console.log(fib(n));
