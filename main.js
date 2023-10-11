@@ -1,40 +1,21 @@
-//  509. Fibonacci Number
+// 492. Construct the Rectangle
 
+area = 122122
 
-n = 10
+var constructRectangle = function (area) {
+    let a = area
+    let b = 1
+    let difference = area - 1
 
-var fib = function (n) {
-
-    if (n == 0) {
-        return 0
+    for (let i = 2; i <= area / 2; i++) {
+        if (((area / i) % 1 === 0) && ((area / i) - i < difference) && (area / i) - i >= 0) {
+            a = area / i
+            b = i
+            difference = a - b
+        }
     }
 
-    if (n == 1) {
-        return 1
-    }
-
-    let result = 0
-    let f0 = 0
-    let f1 = 1
-
-    for (let i = 0; i < n; i++) {
-        result = f0 + f1
-        f1 = f0
-        f0 = result
-    }
-
-
-    // let result = 1
-    // let f0 = 0
-
-    // for (let i = 0; i < n - 1; i++) {
-    //     let temp = result
-    //     result += f0
-    //     f0 = temp
-    // }
-
-    return result;
+    return a - b > 0 ? [a, b] : [b, a]
 };
 
-
-console.log(fib(n));
+console.log(constructRectangle(area));
