@@ -1,21 +1,23 @@
-// 492. Construct the Rectangle
+// 1108. Defanging an IP Address
 
-area = 122122
+address = "255.100.50.0"
+ 
+var defangIPaddr = function(address) {
+    let arr = address.split('')
 
-var constructRectangle = function (area) {
-    let a = area
-    let b = 1
-    let difference = area - 1
 
-    for (let i = 2; i <= area / 2; i++) {
-        if (((area / i) % 1 === 0) && ((area / i) - i < difference) && (area / i) - i >= 0) {
-            a = area / i
-            b = i
-            difference = a - b
+    for(let i =0;i<arr.length;i++){
+        console.log({i,arr});
+        if(arr[i] === '.'){
+            arr.splice(i,0,'[' )
+            arr.splice(i+2,0,']' )
+            i+=2
         }
+
     }
 
-    return a - b > 0 ? [a, b] : [b, a]
+   return arr.join('')
 };
 
-console.log(constructRectangle(area));
+
+console.log(defangIPaddr(address));
