@@ -1,21 +1,27 @@
 // 492. Construct the Rectangle
 
-area = 122122
+gain = [-5,1,5,0,-7]
 
-var constructRectangle = function (area) {
-    let a = area
-    let b = 1
-    let difference = area - 1
+var largestAltitude = function (gain) {
+    // let current = 0
+    // let highest = 0
 
-    for (let i = 2; i <= area / 2; i++) {
-        if (((area / i) % 1 === 0) && ((area / i) - i < difference) && (area / i) - i >= 0) {
-            a = area / i
-            b = i
-            difference = a - b
-        }
+    // for (let i = 0; i < gain.length; i++) {
+    //     current += gain[i]
+    //     if (highest < current) {
+    //         highest = current
+    //     }
+
+    // }
+    // return highest
+
+    let arr = []
+    arr[0] = 0
+    for(let i=0;i<gain.length;i++){
+        arr[i+1] = arr[i]+ gain[i]
     }
+    return Math.max(...arr)
 
-    return a - b > 0 ? [a, b] : [b, a]
 };
 
-console.log(constructRectangle(area));
+console.log(largestAltitude(gain));
