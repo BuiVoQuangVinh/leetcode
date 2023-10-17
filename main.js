@@ -1,44 +1,20 @@
-// 492. Construct the Rectangle
+// 1652. Defuse the Bomb
 
-code = [2, 4, 9, 3], k = -2
 
-var decrypt = function (code, k) {
-    if (k === 0) {
+s = "Let's take LeetCode contest"
 
-        return new Array(code.length).fill(0)
-    }
-    let result = []
-    const length = code.length
-    if (k > 0) {
-        for (let i = 0; i < length; i++) {
-            let temp = 0
+var reverseWords = function(s) {
+    const arr = s.split(" ")
 
-            for (let j = 1; j <= k; j++) {
-                temp += code[(i + j) % length]
-            }
-            result[i] = temp
+    for(let i=0;i<arr.length;i++){
+        let temp=''
+        for(let j=arr[i].length - 1; j>=0;j--){
+            temp+= arr[i][j]
         }
-        return result
+
+        arr[i] = temp
     }
-
-    else {
-        for (let i = 0; i < length; i++) {
-            let temp = 0
-            for (let j = -1; j >= k; j--) {
-                if (i + j >= 0) {
-                    temp += code[i + j]
-                }
-                else {
-                    temp += code[length + i + j]
-                }
-
-            }
-            result[i] = temp
-        }
-        return result
-    }
-
-
+    return arr.join(" ")
 };
 
-console.log(decrypt(code, k));
+console.log(reverseWords(s));
