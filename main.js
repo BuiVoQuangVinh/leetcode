@@ -1,20 +1,28 @@
-// 1652. Defuse the Bomb
+// 1572. Matrix Diagonal Sum
 
 
-s = "Let's take LeetCode contest"
 
-var reverseWords = function(s) {
-    const arr = s.split(" ")
-
-    for(let i=0;i<arr.length;i++){
-        let temp=''
-        for(let j=arr[i].length - 1; j>=0;j--){
-            temp+= arr[i][j]
-        }
-
-        arr[i] = temp
+mat =  [[1,1,1,1],
+[1,1,1,1],
+[1,1,1,1],
+[1,1,1,1]]
+var diagonalSum = function (mat) {
+    let result = 0
+    let length = mat.length
+    let a = 0, b = 0, c = 0, d = length - 1;
+    for (let i = 0; i < length; i++) {
+    
+        result = result + mat[a + i][b + i] + mat[c + i][d - i]
     }
-    return arr.join(" ")
+    if( length %2 === 0){
+        return result
+    }
+
+    else{
+        return result - mat[(length-1)/2][(length-1)/2]
+    }
+   
+
 };
 
-console.log(reverseWords(s));
+console.log(diagonalSum(mat));
