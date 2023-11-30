@@ -1,28 +1,26 @@
-// 657. Robot Return to Origin
+// 796. Rotate String
 
-moves = "UD"
 
-var judgeCircle = function (moves) {
-    let current = [0, 0]
-    for (let i = 0; i < moves.length; i++) {
-        if (moves[i] === 'R') {
-            current[0]++
-        }
-        else if (moves[i] === 'L') {
-            current[0]--
-        }
-        else if (moves[i] === 'U') {
-            current[1]++
-        }
-        else {
-            current[1]--
-        }
-    }
-    if (current[0] === 0 && current[1] === 0) {
+s = "abcde", goal = "abced"
+var rotateString = function (s, abced) {
+    if (s === goal) {
         return true
     }
+    if (s.length !== goal.length) {
+        return false
+    }
+    let temp = s
+    let times = s.length
+    while (times) {
+        temp = temp.slice(s.length - 1) + temp.slice(0, -1)
+        if (temp === goal) {
+            return true
+        }
+        times--
+    }
     return false
+
 };
 
 
-console.log(judgeCircle(moves))
+console.log(rotateString(s, goal))
