@@ -1,38 +1,28 @@
-// 383. Ransom Note
-ransomNote = "abc", magazine = "b"
+// 657. Robot Return to Origin
 
+moves = "UD"
 
-var canConstruct = function (ransomNote, magazine) {
-    const countString = (str) => {
-        const obj = {}
-        for (let i = 0; i < str.length; i++) {
-            if (!obj[str[i]]) {
-                obj[str[i]] = 1
-            }
-            else {
-                obj[str[i]] += 1
-            }
+var judgeCircle = function (moves) {
+    let current = [0, 0]
+    for (let i = 0; i < moves.length; i++) {
+        if (moves[i] === 'R') {
+            current[0]++
         }
-        return obj
-    }
-    const objRansomNot = countString(ransomNote)
-    const objMagazine = countString(magazine)
-
-    for (let key in objRansomNot) {
-        if (objRansomNot[key] > objMagazine[key]) {
-            return false
+        else if (moves[i] === 'L') {
+            current[0]--
         }
-        else if (objRansomNot[key]) {
-            if (!objMagazine[key]){
-                return false
-            }
+        else if (moves[i] === 'U') {
+            current[1]++
+        }
+        else {
+            current[1]--
         }
     }
-    return true
-
-
-
+    if (current[0] === 0 && current[1] === 0) {
+        return true
+    }
+    return false
 };
 
-console.log(canConstruct(ransomNote, magazine))
 
+console.log(judgeCircle(moves))
