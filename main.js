@@ -1,32 +1,39 @@
-// 819. Most Common Word
+// 976. Largest Perimeter Triangle
 
-paragraph = "a, a, a, a, b,b,b,c, c", banned = ["a"]
 
-var mostCommonWord = function (paragraph, banned) {
-    let count = 0
-    const temp = paragraph.replace(/[^\w\s]/gi,' ').toLowerCase().split(" ")
-    const obj = {}
-    let word = ''
-    console.log(temp)
-    for (let i = 0; i < temp.length; i++) {
-        if (banned.includes(temp[i]) || temp[i] == '') {
-        }
-        else if (!obj[temp[i]]) {
-            obj[temp[i]] = 1
-            if (obj[temp[i]] > count) {
-                count = obj[temp[i]]
-                word = temp[i]
+nums = [3,2,3,4]
+
+
+var largestPerimeter = function (nums) {
+    let perimeter = 0
+    let newNums = nums.sort((a, b) => a - b)
+    let current = newNums.length - 1
+    let right = current - 1
+    let left = 0
+
+    console.log(newNums)
+    while (1) {
+        if (current === 2 && right === 1 && left === 0) {
+            if (newNums[current] >= newNums[right] + newNums[left]) {
+                return perimeter
             }
-        }
-        else {
-            obj[temp[i]] += 1
-            if (obj[temp[i]] > count) {
-                count = obj[temp[i]]
-                word = temp[i]
+            else {
+                return newNums[current] + newNums[right] + newNums[left]
             }
+
+        }
+        if (newNums[current] >= newNums[right] + newNums[left]) {
+            current--
+            right = current - 1
+            left = right - 1
+
+        }
+        if(newNums[current] < newNums[right] + newNums[left] ) {
+            perimeter = newNums[current] + newNums[right] + newNums[left]
+            return perimeter
         }
     }
-    return {word,count}
+    return perimeter
 };
 
-console.log(mostCommonWord(paragraph, banned))
+console.log(largestPerimeter(nums))
