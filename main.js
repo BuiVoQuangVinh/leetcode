@@ -1,33 +1,21 @@
-const nums = [18, 43, 36, 13, 7]
+// 1266. Minimum Time Visiting All Points
 
-var sumOfDigits = (num) => {
-    let total = 0
-    while (num > 0) {
-        const temp = num % 10;
-        num = Math.floor(num / 10)
-        total += temp
+
+points = [[3,2],[-2,2]]
+// 3,2
+
+// -2,2
+
+
+// console.log(Math.abs(-1))
+
+var minTimeToVisitAllPoints = function (points) {
+    let step = 0
+    for (let i = 1; i < points.length; i++) {
+        step += Math.max(Math.abs(points[i][0] - points[i - 1][0]), Math.abs(points[i][1] - points[i - 1][1]))
     }
-    return total
-}
+    return step
+};
 
-var maximumSum = function (nums) {
-    let temp = {}
-    let result = -1;
-    for (let i = 0; i < nums.length; i++) {
-        const sumOfDigitsI = sumOfDigits(nums[i])
-        if (temp[sumOfDigitsI]) {
-            if (result < nums[i] + temp[sumOfDigitsI]) {
-                result = nums[i] + temp[sumOfDigitsI]
-            }
-            if (nums[i] > temp[sumOfDigitsI]) {
-                temp = { ...temp, [sumOfDigitsI]: nums[i] }
-            }
-        }
-        else {
-            temp = { ...temp, [sumOfDigitsI]: nums[i] }
-        }
-    }
-    return result
-}
 
-console.log(maximumSum(nums))
+console.log(minTimeToVisitAllPoints(points))
