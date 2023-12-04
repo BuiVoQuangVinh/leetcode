@@ -1,33 +1,26 @@
-const nums = [18, 43, 36, 13, 7]
+// 1464. Maximum Product of Two Elements in an Array
 
-var sumOfDigits = (num) => {
-    let total = 0
-    while (num > 0) {
-        const temp = num % 10;
-        num = Math.floor(num / 10)
-        total += temp
-    }
-    return total
-}
 
-var maximumSum = function (nums) {
-    let temp = {}
-    let result = -1;
+nums = [3, 4, 5, 2]
+
+
+// const sortNums = nums.sort((a,b)=>a-b)// o( n*log(n) )
+var maxProduct = function (nums) {
+    let largest = [0, 0]
     for (let i = 0; i < nums.length; i++) {
-        const sumOfDigitsI = sumOfDigits(nums[i])
-        if (temp[sumOfDigitsI]) {
-            if (result < nums[i] + temp[sumOfDigitsI]) {
-                result = nums[i] + temp[sumOfDigitsI]
-            }
-            if (nums[i] > temp[sumOfDigitsI]) {
-                temp = { ...temp, [sumOfDigitsI]: nums[i] }
-            }
+        if (nums[i] >= largest[0]) {
+            largest[1] = largest[0]
+            largest[0] = nums[i]
         }
         else {
-            temp = { ...temp, [sumOfDigitsI]: nums[i] }
+            if (nums[i] > largest[1]) {
+                largest[1] = nums[i]
+
+            }
         }
     }
-    return result
-}
+    return (largest[0] - 1) * (largest[1] - 1)
+};
 
-console.log(maximumSum(nums))
+
+console.log(maxProduct(nums))
