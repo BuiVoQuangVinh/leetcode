@@ -1,27 +1,21 @@
-//496. Next Greater Element I
+//507. Perfect Number
 
 
-nums1 = [2,4], nums2 = [1,2,3,4]
+num = 99999995
 
-var nextGreaterElement = function (nums1, nums2) {
-    let result = []
-    nums1.map((value,index) => {
-        let point = nums2.indexOf(value)
-        for (let i = point; i < nums2.length; i++) {
-            if (nums2[i] > value) {
-                result.push(nums2[i])
-                break
+var checkPerfectNumber = function (num) {
+    let total = 0
+    for (let i = Math.floor(num / 2); i >0; i--) {
+        if (num % i === 0) {
+            total += i 
+            if(total  > num){
+              return false
             }
-     
-        }
-        if(!result[index]){
-            result.push(-1)
-        }
-    })
-    return result
+        }     
+    }
+    return total === num
 };
 
-
-console.log(nextGreaterElement(nums1, nums2))
+console.log(checkPerfectNumber(num))
 
 
