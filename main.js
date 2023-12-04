@@ -1,8 +1,6 @@
 // 976. Largest Perimeter Triangle
 
-
 nums = [3,2,3,4]
-
 
 var largestPerimeter = function (nums) {
     let perimeter = 0
