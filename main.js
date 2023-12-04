@@ -1,33 +1,34 @@
-const nums = [18, 43, 36, 13, 7]
+// 1189. Maximum Number of Balloons
 
-var sumOfDigits = (num) => {
-    let total = 0
-    while (num > 0) {
-        const temp = num % 10;
-        num = Math.floor(num / 10)
-        total += temp
-    }
-    return total
-}
+text = 'loonbalxballpoon'
 
-var maximumSum = function (nums) {
-    let temp = {}
-    let result = -1;
-    for (let i = 0; i < nums.length; i++) {
-        const sumOfDigitsI = sumOfDigits(nums[i])
-        if (temp[sumOfDigitsI]) {
-            if (result < nums[i] + temp[sumOfDigitsI]) {
-                result = nums[i] + temp[sumOfDigitsI]
-            }
-            if (nums[i] > temp[sumOfDigitsI]) {
-                temp = { ...temp, [sumOfDigitsI]: nums[i] }
-            }
+// balloon 
+var maxNumberOfBalloons = function (text) {
+    const frequencyArr = [0, 0, 0, 0, 0]
+    for (let i = 0; i < text.length; i++) {
+        if(text[i]==='b'){
+            frequencyArr[0] +=1
         }
-        else {
-            temp = { ...temp, [sumOfDigitsI]: nums[i] }
+        else if(text[i]==='a'){
+            frequencyArr[1] +=1
+        }
+
+        else if(text[i]==='l'){
+            frequencyArr[2] +=1
+        }
+
+        else if(text[i]==='o'){
+            frequencyArr[3] +=1
+        }
+
+        else if(text[i]==='n'){
+            frequencyArr[4] +=1
         }
     }
-    return result
-}
+    frequencyArr[2] =Math.floor( frequencyArr[2] /2)
+    frequencyArr[3] =Math.floor( frequencyArr[3] /2)
+    return Math.min(...frequencyArr)
+};
 
-console.log(maximumSum(nums))
+
+console.log(maxNumberOfBalloons(text))
