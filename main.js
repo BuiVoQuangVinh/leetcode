@@ -1,27 +1,25 @@
 // 1446. Consecutive Characters
 
-s = "leetcode"
+nums = [3, 4, 5, 2]
 
 
-var maxPower = function (s) {
-    let result = 1
-    let count = 1
-    for (let i = 1; i < s.length; i++) {
-        if (s[i] === s[i - 1]) {
-            count++
-            if (count > result) {
-                result = count
+// const sortNums = nums.sort((a,b)=>a-b)// o( n*log(n) )
+var maxProduct = function (nums) {
+    let largest = [0, 0]
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] >= largest[0]) {
+            largest[1] = largest[0]
+            largest[0] = nums[i]
+        }
+        else {
+            if (nums[i] > largest[1]) {
+                largest[1] = nums[i]
 
             }
         }
-        else {
-            count = 1
-        }
-
     }
-
-    return result
+    return (largest[0] - 1) * (largest[1] - 1)
 };
 
 
-console.log(maxPower(s))
+console.log(maxProduct(nums))
