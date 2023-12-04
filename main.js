@@ -1,22 +1,20 @@
-// 804. Unique Morse Code Words
+//349. Intersection of Two Arrays
 
-words = ["gin", "zen", "gig", "msg"]
-var uniqueMorseRepresentations = function (words) {
+
+nums1 = [4, 9, 5], nums2 = [9, 4, 9, 8, 4]
+
+var intersection2 = function (nums1, nums2) {
     const result = new Set()
-    const hashTable = { 'a': ".-", 'b': "-...", 'c': "-.-.", 'd': "-..", 'e': ".", 'f': "..-.", 'g': "--.", 'h': "....", 'i': "..", 'j': ".---", 'k': "-.-", 'l': ".-..", 'm': "--", 'n': "-.", 'o': "---", 'p': ".--.", 'q': "--.-", 'r': ".-.", 's': "...", 't': "-", 'u': "..-", 'v': "...-", 'w': ".--", 'x': "-..-", 'y': "-.--", 'z': "--.." }
 
-    for (let i = 0; i < words.length; i++) {
-        let str = ''
-        for (let j = 0; j < words[i].length; j++) {
-
-            str += hashTable[words[i][j]]
+    nums1.map((value) => {
+        if (nums2.indexOf(value) >= 0) {
+            result.add(value)
         }
-        result.add(str)
-    }
-
-    return result.size
+    })
+    return [...result]
 };
 
 
-console.log(uniqueMorseRepresentations(words))
+console.log(intersection2(nums1, nums2))
+
 
