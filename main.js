@@ -1,34 +1,21 @@
-// 1189. Maximum Number of Balloons
+// 1266. Minimum Time Visiting All Points
 
-text = 'loonbalxballpoon'
 
-// balloon 
-var maxNumberOfBalloons = function (text) {
-    const frequencyArr = [0, 0, 0, 0, 0]
-    for (let i = 0; i < text.length; i++) {
-        if(text[i]==='b'){
-            frequencyArr[0] +=1
-        }
-        else if(text[i]==='a'){
-            frequencyArr[1] +=1
-        }
+points = [[3,2],[-2,2]]
+// 3,2
 
-        else if(text[i]==='l'){
-            frequencyArr[2] +=1
-        }
+// -2,2
 
-        else if(text[i]==='o'){
-            frequencyArr[3] +=1
-        }
 
-        else if(text[i]==='n'){
-            frequencyArr[4] +=1
-        }
+// console.log(Math.abs(-1))
+
+var minTimeToVisitAllPoints = function (points) {
+    let step = 0
+    for (let i = 1; i < points.length; i++) {
+        step += Math.max(Math.abs(points[i][0] - points[i - 1][0]), Math.abs(points[i][1] - points[i - 1][1]))
     }
-    frequencyArr[2] =Math.floor( frequencyArr[2] /2)
-    frequencyArr[3] =Math.floor( frequencyArr[3] /2)
-    return Math.min(...frequencyArr)
+    return step
 };
 
 
-console.log(maxNumberOfBalloons(text))
+console.log(minTimeToVisitAllPoints(points))
