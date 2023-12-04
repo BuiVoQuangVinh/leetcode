@@ -1,20 +1,27 @@
-//349. Intersection of Two Arrays
+//496. Next Greater Element I
 
 
-nums1 = [4, 9, 5], nums2 = [9, 4, 9, 8, 4]
+nums1 = [2,4], nums2 = [1,2,3,4]
 
-var intersection2 = function (nums1, nums2) {
-    const result = new Set()
-
-    nums1.map((value) => {
-        if (nums2.indexOf(value) >= 0) {
-            result.add(value)
+var nextGreaterElement = function (nums1, nums2) {
+    let result = []
+    nums1.map((value,index) => {
+        let point = nums2.indexOf(value)
+        for (let i = point; i < nums2.length; i++) {
+            if (nums2[i] > value) {
+                result.push(nums2[i])
+                break
+            }
+     
+        }
+        if(!result[index]){
+            result.push(-1)
         }
     })
-    return [...result]
+    return result
 };
 
 
-console.log(intersection2(nums1, nums2))
+console.log(nextGreaterElement(nums1, nums2))
 
 
