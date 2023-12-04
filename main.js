@@ -2,7 +2,6 @@
 
 s = "leetcode"
 
-
 var maxPower = function (s) {
     let result = 1
     let count = 1
