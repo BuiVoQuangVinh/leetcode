@@ -1,4 +1,5 @@
-// 1446. Consecutive Characters
+// 1464. Maximum Product of Two Elements in an Array
+
 
 nums = [3, 4, 5, 2]
 
