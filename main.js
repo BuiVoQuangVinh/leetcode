@@ -1,39 +1,27 @@
-// 976. Largest Perimeter Triangle
+// 1446. Consecutive Characters
+
+s = "leetcode"
 
 
-nums = [3,2,3,4]
+var maxPower = function (s) {
+    let result = 1
+    let count = 1
+    for (let i = 1; i < s.length; i++) {
+        if (s[i] === s[i - 1]) {
+            count++
+            if (count > result) {
+                result = count
 
-
-var largestPerimeter = function (nums) {
-    let perimeter = 0
-    let newNums = nums.sort((a, b) => a - b)
-    let current = newNums.length - 1
-    let right = current - 1
-    let left = 0
-
-    console.log(newNums)
-    while (1) {
-        if (current === 2 && right === 1 && left === 0) {
-            if (newNums[current] >= newNums[right] + newNums[left]) {
-                return perimeter
             }
-            else {
-                return newNums[current] + newNums[right] + newNums[left]
-            }
+        }
+        else {
+            count = 1
+        }
 
-        }
-        if (newNums[current] >= newNums[right] + newNums[left]) {
-            current--
-            right = current - 1
-            left = right - 1
-
-        }
-        if(newNums[current] < newNums[right] + newNums[left] ) {
-            perimeter = newNums[current] + newNums[right] + newNums[left]
-            return perimeter
-        }
     }
-    return perimeter
+
+    return result
 };
 
-console.log(largestPerimeter(nums))
+
+console.log(maxPower(s))
