@@ -1,25 +1,34 @@
-// 1446. Consecutive Characters
+// 1189. Maximum Number of Balloons
 
-nums = [3, 4, 5, 2]
+text = 'loonbalxballpoon'
 
-
-// const sortNums = nums.sort((a,b)=>a-b)// o( n*log(n) )
-var maxProduct = function (nums) {
-    let largest = [0, 0]
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[i] >= largest[0]) {
-            largest[1] = largest[0]
-            largest[0] = nums[i]
+// balloon 
+var maxNumberOfBalloons = function (text) {
+    const frequencyArr = [0, 0, 0, 0, 0]
+    for (let i = 0; i < text.length; i++) {
+        if(text[i]==='b'){
+            frequencyArr[0] +=1
         }
-        else {
-            if (nums[i] > largest[1]) {
-                largest[1] = nums[i]
+        else if(text[i]==='a'){
+            frequencyArr[1] +=1
+        }
 
-            }
+        else if(text[i]==='l'){
+            frequencyArr[2] +=1
+        }
+
+        else if(text[i]==='o'){
+            frequencyArr[3] +=1
+        }
+
+        else if(text[i]==='n'){
+            frequencyArr[4] +=1
         }
     }
-    return (largest[0] - 1) * (largest[1] - 1)
+    frequencyArr[2] =Math.floor( frequencyArr[2] /2)
+    frequencyArr[3] =Math.floor( frequencyArr[3] /2)
+    return Math.min(...frequencyArr)
 };
 
 
-console.log(maxProduct(nums))
+console.log(maxNumberOfBalloons(text))
