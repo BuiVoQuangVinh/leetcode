@@ -1,41 +1,19 @@
-//1688. Count of Matches in Tournament
+// 1662. Check If Two String Arrays are Equivalent.
 
 
-words = ["cat", "bt", "hat", "tree"], chars = "atach"
+word1 = ["ab", "c"], word2 = ["a", "bc"]
 
-var countCharacters = function (words, chars) {
-    const obj = {}
-    let result = 0
-    for (let i = 0; i < chars.length; i++) {
-        if (!obj[chars[i]]) {
-            obj[chars[i]] = 1
-        }
-        else {
-            obj[chars[i]] += 1
+var arrayStringsAreEqual = function (word1, word2) {
+    const str1 = word1.reduce((initialStr, word) => {
+        return initialStr + word
+    }, "")
 
-        }
-    }
-    words.map((word) => {
-        let temp = {...obj}
-        let flat = true
-        for (let i = 0; i < word.length; i++) {
-            if (!temp[word[i]] || temp[word[i]] < 0) {
-                flat = false
-                break
-            }
-            else {
-                temp[word[i]]--
-                if (temp[word[i]] < 0) {
-                    flat = false
-                    break
-                }
-            }
-        }
-        if(flat){
-            result+=word.length
-        }
-    })
-    return result
+    const str2 = word2.reduce((initialStr, word) => {
+        return initialStr + word
+    }, "")
+
+    return str1 === str2
 };
 
-console.log(countCharacters(words, chars))
+
+console.log(arrayStringsAreEqual(word1, word2))
