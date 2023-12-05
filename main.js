@@ -1,19 +1,32 @@
-// 1662. Check If Two String Arrays are Equivalent.
+// 2483. Minimum Penalty for a Shop
 
+customers = "YYNY"
 
-word1 = ["ab", "c"], word2 = ["a", "bc"]
+var bestClosingTime = function (customers) {
+    let penalty = 0
+    for (let customer of customers) {
+        if (customer == 'Y') {
+            penalty++
+        }
+    }
+    let current = penalty
+    let result = [0, current]
 
-var arrayStringsAreEqual = function (word1, word2) {
-    const str1 = word1.reduce((initialStr, word) => {
-        return initialStr + word
-    }, "")
+    for (let i = 0; i < customers.length; i++) {
+        if (customers[i] === 'Y') {
+            current--
+        }
+        else {
+            current++
+        }
 
-    const str2 = word2.reduce((initialStr, word) => {
-        return initialStr + word
-    }, "")
-
-    return str1 === str2
+        if (current < result[1]) {
+            result[1] = current
+            result[0] = i + 1
+        }
+    }
+    return result[0]
 };
 
 
-console.log(arrayStringsAreEqual(word1, word2))
+console.log(bestClosingTime(customers))
