@@ -1,21 +1,41 @@
-//507. Perfect Number
+//1688. Count of Matches in Tournament
 
 
-num = 99999995
+words = ["cat", "bt", "hat", "tree"], chars = "atach"
 
-var checkPerfectNumber = function (num) {
-    let total = 0
-    for (let i = Math.floor(num / 2); i >0; i--) {
-        if (num % i === 0) {
-            total += i 
-            if(total  > num){
-              return false
-            }
-        }     
+var countCharacters = function (words, chars) {
+    const obj = {}
+    let result = 0
+    for (let i = 0; i < chars.length; i++) {
+        if (!obj[chars[i]]) {
+            obj[chars[i]] = 1
+        }
+        else {
+            obj[chars[i]] += 1
+
+        }
     }
-    return total === num
+    words.map((word) => {
+        let temp = {...obj}
+        let flat = true
+        for (let i = 0; i < word.length; i++) {
+            if (!temp[word[i]] || temp[word[i]] < 0) {
+                flat = false
+                break
+            }
+            else {
+                temp[word[i]]--
+                if (temp[word[i]] < 0) {
+                    flat = false
+                    break
+                }
+            }
+        }
+        if(flat){
+            result+=word.length
+        }
+    })
+    return result
 };
 
-console.log(checkPerfectNumber(num))
-
-
+console.log(countCharacters(words, chars))
