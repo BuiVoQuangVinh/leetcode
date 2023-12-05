@@ -1,45 +1,23 @@
-// 1561.Maximum Number of Coins You Can Get
+// 1492. The kth Factor of n
+n = 12, k = 3
 
-piles = [2,4,1,2,7,8]
-var maxCoins = function (piles) {
-    piles.sort((a, b) => a - b)
+var kthFactor = function (n, k) {
+    const factorInteger = []
+   
+    for (let i = 1; i <= n; i++) {
+        if (n % i === 0) {
+            factorInteger.push(i)
 
-    let result = 0
-    let loop = piles.length / 3
-    let current = piles.length - 2
-
-    while (loop) {
-        result += piles[current]
-        current -= 2
-        loop--
+            if (factorInteger.length === k ) {
+                console.log(factorInteger)
+                return factorInteger[k - 1]
+            }
+        }
     }
-    return result
-    // let right = piles.length - 1
-    // let left = 0
-    // let result = {
-    //     alice: 0,
-    //     you: 0,
-    //     bob: 0,
-    // }
-    // while (true) {
-    //     result.alice += piles[right]
-    //     right--
-    //     if (right === left) {
-    //         break
-    //     }
-    //     result.you += piles[right]
-    //     right--
-    //     if (right === left) {
-    //         break
-    //     }
-    //     result.bob += piles[left]
-    //     left++
-    //     if (right === left) {
-    //         break
-    //     }
-    // }
-    // return result.you
+
+    return -1
+
+
 };
 
-
-console.log(maxCoins(piles))
+console.log(kthFactor(n, k))
