@@ -1,32 +1,45 @@
-// 2483. Minimum Penalty for a Shop
+// 1561.Maximum Number of Coins You Can Get
 
-customers = "YYNY"
+piles = [2,4,1,2,7,8]
+var maxCoins = function (piles) {
+    piles.sort((a, b) => a - b)
 
-var bestClosingTime = function (customers) {
-    let penalty = 0
-    for (let customer of customers) {
-        if (customer == 'Y') {
-            penalty++
-        }
+    let result = 0
+    let loop = piles.length / 3
+    let current = piles.length - 2
+
+    while (loop) {
+        result += piles[current]
+        current -= 2
+        loop--
     }
-    let current = penalty
-    let result = [0, current]
-
-    for (let i = 0; i < customers.length; i++) {
-        if (customers[i] === 'Y') {
-            current--
-        }
-        else {
-            current++
-        }
-
-        if (current < result[1]) {
-            result[1] = current
-            result[0] = i + 1
-        }
-    }
-    return result[0]
+    return result
+    // let right = piles.length - 1
+    // let left = 0
+    // let result = {
+    //     alice: 0,
+    //     you: 0,
+    //     bob: 0,
+    // }
+    // while (true) {
+    //     result.alice += piles[right]
+    //     right--
+    //     if (right === left) {
+    //         break
+    //     }
+    //     result.you += piles[right]
+    //     right--
+    //     if (right === left) {
+    //         break
+    //     }
+    //     result.bob += piles[left]
+    //     left++
+    //     if (right === left) {
+    //         break
+    //     }
+    // }
+    // return result.you
 };
 
 
-console.log(bestClosingTime(customers))
+console.log(maxCoins(piles))
