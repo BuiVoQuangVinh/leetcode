@@ -1,38 +1,30 @@
-// 2733. Neither Minimum nor Maximum
+//2722. Join Two Arrays by ID
 
 
 
 
-nums = [3, 2, 1, 4]
+arr1 = [{"id":1,"x":36,"d":26,"f":35},{"id":3,"c":20,"z":75}]
+arr2 = [{"id":2,"o":48,"z":84,"y":61}]
 
-var findNonMinOrMax = function (nums) {
-    if (nums.length <= 2) {
-        return -1
+var join = function (arr1, arr2) {
+
+    const collect = {}
+
+    for (const obj of [...arr1, ...arr2]) {
+        const id = obj.id;
+        collect[id] = { ...(collect[id] || {}), ...obj };
     }
-    else {
-        if ((nums[0] > nums[1] && nums[0] < nums[2]) || (nums[0] < nums[1] && nums[0] > nums[2])) {
-            return nums[0]
-        }
-        else if ((nums[1] > nums[0] && nums[1] < nums[2]) || (nums[1] < nums[0] && nums[1] > nums[2])) {
-            return nums[1]
-        }
 
-        else {
-            return nums[2]
-        }
-    }
-    // trường hợp nums có element giống nhau
-    // if(nums.length <=2){
-    //     return -1
-    // }
-    // const set = new Set(nums.sort((a, b) => a - b))
-    // if (set.size <= 2){
-    //     return -1
-    // }
-    // else{
-    //     return [...set][1]
-    // } 
+    return Object.values(collect)
+ 
+};  
 
-};
+console.log(join(arr1, arr2))
 
-console.log(findNonMinOrMax(nums))
+
+// arr1 = {"id": 2, "x": 3, "y": 6}
+
+// arr2 = {"id": 2, "x": 10, "y": 20}
+ 
+
+// console.log({...arr2,...arr1})
