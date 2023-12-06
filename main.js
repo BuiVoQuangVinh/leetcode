@@ -1,43 +1,15 @@
-// 1684. Count the Number of Consistent Strings
+// 2696. Minimum String Length After Removing Substrings
 
 
-allowed = "cad", words = ["cc","acd","b","ba","bac","bad","ac","d"]
 
-var countConsistentStrings = function (allowed, words) {
-    // const hashMap = {}
-    // for (let i = 0; i < allowed.length; i++) {
-    //     if (!hashMap[allowed[i]]) {
-    //         hashMap[allowed[i]] = 1
-    //     }
-    // }
-    // let result = 0
-    // for (let word of words) {
-    //     let flag = true
-    //     for (let char of word) {
-    //         if (!hashMap[char]) {
-    //             flag = false
-    //             break
-    //         }
-    //     }
-    //     if (flag) {
-    //         result++
-    //     }
-    // }
-    // return result
-    let result = 0
-    for (let word of words) {
-        let flag = true
-        for (let char of word) {
-            if (allowed.indexOf(char) < 0) {
-                flag = false
-                break
-            }
-        }
-        if(flag){
-            result++
-        }
+s = "ABFCACDB"
+
+var minLength = function (s) {
+    while (s.indexOf('AB') >= 0 || s.indexOf('CD') >= 0) {
+        s = s.replace(/AB|CD/g, "")
     }
-    return result
+    return s.length
+
 };
 
-console.log(countConsistentStrings(allowed, words))
+console.log(minLength(s))
