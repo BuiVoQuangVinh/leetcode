@@ -1,24 +1,43 @@
-// 1742. Maximum Number of Balls in a Box
+// 1684. Count the Number of Consistent Strings
 
 
-lowLimit = 1, highLimit = 10
+allowed = "cad", words = ["cc","acd","b","ba","bac","bad","ac","d"]
 
-var countBalls = function (lowLimit, highLimit) {
-    let largest = 0
-    let boxNumber = Array(56).fill(0)
-    for (let i = lowLimit; i <= highLimit; i++) {
-        let current = 0;
-        let temp = i
-        while (temp > 0) {
-            current += temp % 10
-            temp = Math.floor(temp/10)
+var countConsistentStrings = function (allowed, words) {
+    // const hashMap = {}
+    // for (let i = 0; i < allowed.length; i++) {
+    //     if (!hashMap[allowed[i]]) {
+    //         hashMap[allowed[i]] = 1
+    //     }
+    // }
+    // let result = 0
+    // for (let word of words) {
+    //     let flag = true
+    //     for (let char of word) {
+    //         if (!hashMap[char]) {
+    //             flag = false
+    //             break
+    //         }
+    //     }
+    //     if (flag) {
+    //         result++
+    //     }
+    // }
+    // return result
+    let result = 0
+    for (let word of words) {
+        let flag = true
+        for (let char of word) {
+            if (allowed.indexOf(char) < 0) {
+                flag = false
+                break
+            }
         }
-        boxNumber[current]++
-        if( boxNumber[current] > largest ){
-            largest = boxNumber[current]
+        if(flag){
+            result++
         }
     }
-    return largest
+    return result
 };
 
-console.log(countBalls(lowLimit, highLimit))
+console.log(countConsistentStrings(allowed, words))
