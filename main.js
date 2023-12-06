@@ -1,70 +1,24 @@
-// 1790. Check if One String Swap Can Make Strings Equal
-
-s1 = "bank", s2 = "kanb"
+// 1742. Maximum Number of Balls in a Box
 
 
+lowLimit = 1, highLimit = 10
 
-var areAlmostEqual = function (s1, s2) {
-
-    if (s1 === s2) {
-        return true
-    }
-    let collect = []
-
-    for (let i = 0; i < s1.length; i++) {
-        if (s1[i] !== s2[i]) {
-
-            collect.push(i)
+var countBalls = function (lowLimit, highLimit) {
+    let largest = 0
+    let boxNumber = Array(56).fill(0)
+    for (let i = lowLimit; i <= highLimit; i++) {
+        let current = 0;
+        let temp = i
+        while (temp > 0) {
+            current += temp % 10
+            temp = Math.floor(temp/10)
+        }
+        boxNumber[current]++
+        if( boxNumber[current] > largest ){
+            largest = boxNumber[current]
         }
     }
-    console.log(collect)
-    if (collect.length !== 2) {
-        return false
-    }
-
-    else if (s1[collect[0]] === s2[collect[1]] && s2[collect[0]] === s1[collect[1]]) {
-        return true
-    }
-
-    else {
-        return false
-    }
-
-    // if( s1 === s2){
-    //     return true
-    // }
-
-    // let count = 0
-    // const hashTableS1 = {}
-    // for (let i = 0; i < s1.length; i++) {
-    //     if (!hashTableS1[s1[i]]) {
-    //         hashTableS1[s1[i]] = 1
-    //     }
-    //     else {
-    //         hashTableS1[s1[i]] += 1
-    //     }
-    // }
-
-
-    // for(let i =0;i<s1.length;i++){
-    //     if (!hashTableS1[s2[i]]){
-    //         return false
-    //     }
-    //     else{
-    //         hashTableS1[s2[i]] --
-    //         if( !hashTableS1[s2[i]] <0){
-    //             return false
-    //         }
-    //         if( s1[i] !== s2[i]){
-    //             count++
-    //             if(count >2){
-    //                 return false
-    //             }
-    //         }
-    //     }
-
-    // }
-    // return true
+    return largest
 };
 
-console.log(areAlmostEqual(s1, s2))
+console.log(countBalls(lowLimit, highLimit))
