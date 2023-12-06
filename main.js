@@ -1,15 +1,38 @@
-// 2696. Minimum String Length After Removing Substrings
+// 2733. Neither Minimum nor Maximum
 
 
 
-s = "ABFCACDB"
 
-var minLength = function (s) {
-    while (s.indexOf('AB') >= 0 || s.indexOf('CD') >= 0) {
-        s = s.replace(/AB|CD/g, "")
+nums = [3, 2, 1, 4]
+
+var findNonMinOrMax = function (nums) {
+    if (nums.length <= 2) {
+        return -1
     }
-    return s.length
+    else {
+        if ((nums[0] > nums[1] && nums[0] < nums[2]) || (nums[0] < nums[1] && nums[0] > nums[2])) {
+            return nums[0]
+        }
+        else if ((nums[1] > nums[0] && nums[1] < nums[2]) || (nums[1] < nums[0] && nums[1] > nums[2])) {
+            return nums[1]
+        }
+
+        else {
+            return nums[2]
+        }
+    }
+    // trường hợp nums có element giống nhau
+    // if(nums.length <=2){
+    //     return -1
+    // }
+    // const set = new Set(nums.sort((a, b) => a - b))
+    // if (set.size <= 2){
+    //     return -1
+    // }
+    // else{
+    //     return [...set][1]
+    // } 
 
 };
 
-console.log(minLength(s))
+console.log(findNonMinOrMax(nums))
