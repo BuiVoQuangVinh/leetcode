@@ -1,23 +1,22 @@
-// 1492. The kth Factor of n
-n = 12, k = 3
+// 1716. Calculate Money in Leetcode Bank
 
-var kthFactor = function (n, k) {
-    const factorInteger = []
-   
-    for (let i = 1; i <= n; i++) {
-        if (n % i === 0) {
-            factorInteger.push(i)
+n = 20
 
-            if (factorInteger.length === k ) {
-                console.log(factorInteger)
-                return factorInteger[k - 1]
-            }
-        }
+var totalMoney = function (n) {
+    let total = 0
+    let weeks = Math.floor(n / 7)
+    let days = n - 7 * weeks
+
+    for (let i = 0; i < weeks; i++) {
+        total = total + 28 + 7 * i
     }
 
-    return -1
+    for (let i = 1; i <= days; i++) {
+        total = total + i + weeks
+    }
 
-
+    return total
 };
 
-console.log(kthFactor(n, k))
+
+console.log(totalMoney(n))
