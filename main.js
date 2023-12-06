@@ -1,22 +1,19 @@
-// 1716. Calculate Money in Leetcode Bank
+// 1876. Substrings of Size Three with Distinct Characters
 
-n = 20
 
-var totalMoney = function (n) {
-    let total = 0
-    let weeks = Math.floor(n / 7)
-    let days = n - 7 * weeks
+s = "aababcabc"
 
-    for (let i = 0; i < weeks; i++) {
-        total = total + 28 + 7 * i
+var countGoodSubstrings = function(s) {
+    let numberOfGoodSubStrings = 0
+    for(let i = 0;i<s.length -2;i++){
+        let temp =   s.slice(i,i+3) 
+        if( temp[0] !== temp[1] && temp[0] !== temp[2] && temp[1] !== temp[2] ){
+            numberOfGoodSubStrings ++
+        }
+
     }
-
-    for (let i = 1; i <= days; i++) {
-        total = total + i + weeks
-    }
-
-    return total
+    return numberOfGoodSubStrings
 };
 
 
-console.log(totalMoney(n))
+console.log(countGoodSubstrings(s))
