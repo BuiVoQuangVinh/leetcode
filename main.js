@@ -1,30 +1,40 @@
-//2722. Join Two Arrays by ID
+// 2665. Counter II
 
+init = 0, calls = ["increment","increment","decrement","reset","reset"]
 
-
-
-arr1 = [{"id":1,"x":36,"d":26,"f":35},{"id":3,"c":20,"z":75}]
-arr2 = [{"id":2,"o":48,"z":84,"y":61}]
-
-var join = function (arr1, arr2) {
-
-    const collect = {}
-
-    for (const obj of [...arr1, ...arr2]) {
-        const id = obj.id;
-        collect[id] = { ...(collect[id] || {}), ...obj };
+var createCounter = function(init) {
+    let temp = init     
+    const increment=()=>{
+        temp++
+        return temp
     }
+    const decrement=()=>{
+        temp--
+        return temp
+    }
+    const reset=()=> {
+        temp = init
+         return temp
+    }
+    return {
+        increment,
+        decrement,
+        reset,
+    }
+};
 
-    return Object.values(collect)
- 
-};  
+const counter = createCounter()
 
-console.log(join(arr1, arr2))
+// console.log(counter)
+calls.map( (call)=>{
+    console.log(counter[call]())
+} )
+
+
 
 
 // arr1 = {"id": 2, "x": 3, "y": 6}
 
-// arr2 = {"id": 2, "x": 10, "y": 20}
+    // arr2 = {"id": 2, "x": 10, "y": 20}
  
-
 // console.log({...arr2,...arr1})
