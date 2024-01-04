@@ -1,40 +1,31 @@
-// 2665. Counter II
+// 2283. Check if Number Has Equal Digit Count and Digit Value
 
-init = 0, calls = ["increment","increment","decrement","reset","reset"]
 
-var createCounter = function(init) {
-    let temp = init     
-    const increment=()=>{
-        temp++
-        return temp
+var digitCount = function (num) {
+  const arr = new Array(10).fill(0);
+  if (num.length == 1) {
+    return false
+  }
+  for (let n of num) {
+
+    arr[+n] += 1;
+  }
+
+  console.log(arr);
+  for (let i = 0; i < num.length; i++) {
+    arr[i] -= num[i];
+  }
+
+  console.log(arr);
+  for (let n of arr) {
+    if (n != 0) {
+      return false
     }
-    const decrement=()=>{
-        temp--
-        return temp
-    }
-    const reset=()=> {
-        temp = init
-         return temp
-    }
-    return {
-        increment,
-        decrement,
-        reset,
-    }
+  }
+  return true;
+
 };
 
-const counter = createCounter()
 
-// console.log(counter)
-calls.map( (call)=>{
-    console.log(counter[call]())
-} )
-
-
-
-
-// arr1 = {"id": 2, "x": 3, "y": 6}
-
-    // arr2 = {"id": 2, "x": 10, "y": 20}
- 
-// console.log({...arr2,...arr1})
+const num = "6210001000";
+console.log(digitCount(num));
