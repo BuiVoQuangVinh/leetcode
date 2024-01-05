@@ -1,30 +1,46 @@
-// 504. Base 7
+// 455. Assign Cookies
 
-var convertToBase7 = function (num) {
-  let result = ""
 
-  if (num == 0) {
-    return '0'
+var findContentChildren = function (g, s) {
+
+  if (s.length == 0) {
+    return 0
   }
-  else if (num > 0) {
-    while (num > 0) {
-      const temp = num % 7;
-      result =temp+result;
-      num = (num - temp) / 7;
+  const sortG = g.sort((a, b) => a - b);
+  const sortS = s.sort((a, b) => a - b);
+
+  let result = 0;
+  let indexS = 0;
+  let indexG = 0;
+  while (indexG < sortG.length && indexS < sortS.length) {
+    if (sortG[indexG] <= sortS[indexS]) {
+      indexG++;
+      indexS++;
+      result++;
     }
-
-    return result;
-  }
-  else {
-    num *= -1
-    while (num > 0) {
-      const temp = num % 7;
-      result = temp+result;
-      num = (num - temp) / 7;
+    else if (sortG[indexG] > sortS[indexS]) {
+      indexS++
     }
-    return `-${result}`;
   }
+  //   for (let i = 0; i < sortG.length; i++) {
+  //     console.log(indexS , i)
+  //     if (sortG[i] <= sortS[indexS]) {
+  //       indexS++;
+  //       result++;
+  //        if(indexS == sortS.length){
+  //         break;
+  //       }
+  //     }
+  //     else {
+  //       indexS++;
+  //       if(indexS == sortS.length){
+  //         break
+  //       }
+  //       i--;
+  //     }
+  //   }
+  return result;
+
 };
-
-num = 565
-console.log(convertToBase7(num))
+g = [10, 9, 8, 7], s = [5, 6, 7, 8]
+console.log(findContentChildren(g, s))
