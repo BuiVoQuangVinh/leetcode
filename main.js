@@ -1,46 +1,69 @@
-// 455. Assign Cookies
+// 594. Longest Harmonious Subsequence
 
-
-var findContentChildren = function (g, s) {
-
-  if (s.length == 0) {
-    return 0
-  }
-  const sortG = g.sort((a, b) => a - b);
-  const sortS = s.sort((a, b) => a - b);
-
+var findLHS = function (nums) {
   let result = 0;
-  let indexS = 0;
-  let indexG = 0;
-  while (indexG < sortG.length && indexS < sortS.length) {
-    if (sortG[indexG] <= sortS[indexS]) {
-      indexG++;
-      indexS++;
-      result++;
-    }
-    else if (sortG[indexG] > sortS[indexS]) {
-      indexS++
+  const obj = {};
+  for (let num of nums) {
+    if (obj[num]) {
+      obj[num]++
+    } else {
+      obj[num] = 1
     }
   }
-  //   for (let i = 0; i < sortG.length; i++) {
-  //     console.log(indexS , i)
-  //     if (sortG[i] <= sortS[indexS]) {
-  //       indexS++;
-  //       result++;
-  //        if(indexS == sortS.length){
-  //         break;
+
+  for (let num of nums) {
+    if (obj[num + 1]) {
+      result = Math.max((obj[num + 1] + obj[num]), result)
+    }
+  }
+
+  return result
+
+
+
+  // for (let i = 0; i < nums.length - 1; i++) {
+  //   const tempArr = [nums[i]];
+  //   for (let j = i + 1; j < nums.length; j++) {
+  //     if (Math.abs(tempArr[0] - nums[j]) <= 1) {
+  //       const temp = new Set(tempArr)
+  //       if (temp.size <= 2 && temp.has(nums[j])) {
+  //         tempArr.push(nums[j])
   //       }
-  //     }
-  //     else {
-  //       indexS++;
-  //       if(indexS == sortS.length){
-  //         break
+  //       else if (temp.size == 1 && !temp.has(nums[j])) {
+  //         tempArr.push(nums[j])
   //       }
-  //       i--;
+
   //     }
   //   }
-  return result;
+  //   console.log(tempArr)
+  //   const set = new Set(tempArr)
+  //   if (set.size == 2) {
+  //     max = Math.max(max, tempArr.length);
+  //   }
+  // }
+  // return max;
 
+  // while (current < nums.length) {
+  //   if (Math.abs(nums[index] - nums[current]) == 1 && Math.abs(nums[index] - nums[index - 1]) <= 1) {
+  //     index++;
+  //     temp++;
+  //     if (index > nums.length) {
+  //       max = Math.max(max, temp);
+  //       break;
+  //     }
+
+  //   }
+
+  //   else {
+  //     current = index;
+  //     index = current + 1;
+  //     max = Math.max(max, temp);
+  //     temp = 0;
+  //   }
+
+  // }
+  // return max;
 };
-g = [10, 9, 8, 7], s = [5, 6, 7, 8]
-console.log(findContentChildren(g, s))
+
+nums = [2, 2, 2, 2, 2, 2, 2, 3, 1, 0, 0, 0, 3, 1, -1, 0, 1, 1, 0, 0, 1, 1, 2, 2, 2, 0, 1, 2, 2, 3, 2]
+console.log(findLHS(nums))
