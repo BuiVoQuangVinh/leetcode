@@ -1,56 +1,35 @@
-// 500. Keyboard Row
+// 504. Base 7
 
-var findWords = function (words) {
-  const hashTable = {
-    q: 1,
-    w: 1,
-    e: 1,
-    r: 1,
-    t: 1,
-    y: 1,
-    u: 1,
-    i: 1,
-    o: 1,
-    p: 1,
-    a: 2,
-    s: 2,
-    d: 2,
-    f: 2,
-    g: 2,
-    h: 2,
-    j: 2,
-    k: 2,
-    l: 2,
-    z: 3,
-    x: 3,
-    c: 3,
-    v: 3,
-    b: 3,
-    n: 3,
-    m: 3,
+var convertToBase7 = function (num) {
+  const result = []
+  let numberBase7 = 0
+  if (num == 0) {
+    return '0'
   }
-  const result = [];
-  for (let word of words) {
-    const toLowWord = word.toLowerCase()
-    if (toLowWord.length == 1) {
-      result.push(word)
+  else if (num > 0) {
+    while (num > 0) {
+      const temp = num % 7;
+      result.push(temp)
+      num = (num - temp) / 7;
     }
-    else {
-      for (let i = 1; i < toLowWord.length; i++) {
-        if (hashTable[toLowWord[0]] !== hashTable[toLowWord[i]]) {
-          break
-        }
-        else {
-          if (i == (toLowWord.length - 1)) {
-            result.push(word)
-          }
-        }
-      }
+    while (result.length > 0) {
+      numberBase7 = numberBase7 * 10 + result.pop();
     }
+    return `${numberBase7}`;
   }
-  return result
+  else {
+    num *= -1
+    while (num > 0) {
+      const temp = num % 7;
+      result.push(temp)
+      num = (num - temp) / 7;
+    }
+    while (result.length > 0) {
+      numberBase7 = numberBase7 * 10 + result.pop();
+    }
+    return `${numberBase7*(-1)}`;
+  }
 };
 
-
-const words = ["Hello", "Alaska", "Dad", "Peace",'a','b'];
-console.log(findWords(words));
+num = -565
+console.log(convertToBase7(num))
