@@ -1,21 +1,33 @@
-// 2574. Left and Right Sum Differences
+// 2210. Count Hills and Valleys in an Array
+var countHillValley = function (nums) {
+  let result = 0;
 
-var leftRightDifference = function (nums) {
-  const result = [];
-  const total = nums.reduce((sum, value) => {
-    return sum + value;
-  }, 0);
-  let leftSum = 0;
-  for (let i = 0; i < nums.length; i++) {
-    let rightSum = total - nums[i] - leftSum;
-    result.push(Math.abs(rightSum - leftSum));
-    leftSum += nums[i];
+  let idx = 1;
+  let n = nums.length;
+
+
+  while (idx < n) {
+    let temp = idx + 1;
+    while (nums[temp] == nums[idx]) {
+      temp++;
+    }
+    console.log({ idx: nums[idx], temp: nums[temp] })
+    let left = nums[idx] - nums[idx - 1];
+    let right = nums[idx] - nums[temp];
+
+    if ((left < 0 && right < 0) || left > 0 && right > 0) {
+      result++;
+
+    }
+    idx = temp;
+
   }
   return result;
+
 };
 
 
 
-nums = [10, 4, 8, 3]
+nums = [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6];
 
-leftRightDifference(nums);
+console.log(countHillValley(nums));
